@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+	<!--<meta name="viewport" content="user-scalable=no">-->
+    <title>コントローラー</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>-->
+	<script type="text/javascript" src="footerFixed.js"></script>
+	<script src="/controller/courseController.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/course.css">
+</head>
+<body>
+
+	<ul class="tab">
+	<li id="controller" class="select">コントローラー</li>
+	<li id="career">案内図</li>
+	</ul>
+	<ul class="content">
+	<li>
+	<div class="course">
+		<div class="courseSelect1">
+			<button class="courseBtn1" type="submit">1</button>
+			<button class="courseBtn2" type="submit">2</button>
+			<button class="courseBtn3" type="submit">3</button>
+		</div>
+		<div class="courseSelect2">
+			<button class="courseBtn4" type="submit">4</button>
+			<button class="courseBtn5" type="submit">5</button>
+			<button class="courseBtn6" type="submit">6</button>
+		</div>
+		<div class="courseSelect3">
+			<button class="courseBtn7" type="submit">7</button>
+			<button class="courseBtn8" type="submit">8</button>
+			<button class="courseBtn9" type="submit">9</button>
+		</div>
+		<div class="courseSelect4">
+			<button class="courseBtn10" type="submit">10</button>
+		</div>
+	</div>
+	<div id="footer" class="courseReset">
+		<div class="courseFooter">
+			<!--<button class="courseBeforeReturn" type="submit">一つ前に戻る</button>-->
+			<button class="courseReturn" type="submit">メインメニューに戻る</button>
+			<button class="courseRelease" type="submit">接続解除</button>
+		</div>
+		<div class="courseDetailFooter">
+			<button class="courseBeforeReturn2" type="submit">一つ前に戻る</button>
+			<button class="courseReturn2" type="submit">メインメニューに戻る</button>
+			<button class="courseRelease2" type="submit">接続解除</button>
+		</div>
+	</div>
+	</li>
+	<li class="hide"><img class="pic1" src="/picture/career.png" alt="画像1"></li>
+</ul>
+
+	
+</body>
+</html>

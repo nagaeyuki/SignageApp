@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+	<!--<meta name="viewport" content="user-scalable=no">-->
+    <title>コントローラー</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>-->
+	<script type="text/javascript" src="footerFixed.js"></script>
+	<script src="/controller/kyujinDetailController.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/controller.css">
+</head>
+<body>
+	<div class="kyujin_detail">
+		<button class="urlBtn" type="submit">urlを開く</button>
+		<button class="secret" type="submit">OB・OG情報を見る</button>
+		<div id="footer" class="kyujinReset2">
+			<button class="kyujinBeforeReturn2" type="submit">一つ前に戻る</button>
+			<button class="kyujinReturn2" type="submit">メインメニューに戻る</button>
+			<button class="kyujinRelease2" type="submit">接続解除</button>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "signage-app",
+  "version": "0.0.0",
+  "description": "SignageApp",
+  "main": "server.js",
+  "author": {
+    "name": "nagae"
+  }
+}

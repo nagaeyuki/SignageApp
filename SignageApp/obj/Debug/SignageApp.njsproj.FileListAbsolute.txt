@@ -1,0 +1,2 @@
+C:\Users\nagae\Desktop\SignageApp\SignageApp\obj\Debug\SignageApp.njsprojResolveAssemblyReference.cache
+C:\Users\nagae\Desktop\SignageApp\SignageApp\bin\Microsoft.NodejsTools.WebRole.dll

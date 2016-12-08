@@ -1,0 +1,314 @@
+body {
+	background-color: #ffffff;
+}
+
+#faqTitle {
+	font-size: 2.5em;
+	position: absolute;
+	top: 50px;
+	left: 150px;
+	margin: auto;
+}
+
+#faqMessage {
+	font-size: 1.5em;
+	position: absolute;
+	top: 70px;
+	right: 50px;
+	margin: auto;
+}
+
+
+#faqFieldText1,#faqFieldText2,#faqFieldText3 {
+	font-size: 2em;
+	position: absolute;
+	top: 20px;
+	left: 30px;
+	margin: auto;
+}
+
+.faqSignage {
+	width: 1000px;
+	height: 550px;
+	//background-color: #00ffff;
+	position: absolute;
+	top: 120px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+.faq1,.faq2,.faq3 {
+	width: 1000px;
+	height: 550px;
+	//background-color: #0055ff;
+}
+
+.slideFoward {
+	position: absolute;
+	top: 0;
+}
+
+.slideReverse {
+	position: absolute;
+	bottom: 0;
+}
+
+.faqItem1,.faqItem2,.faqItem3,.faqItem4,.faqItem5,.faqItem6 {
+    width: 300px;
+	height: 250px;
+    background-color: #d6eaff;
+	font-size: 2.5em;
+	font-weight: bold;
+	border-radius: 20px;
+	text-align:center;
+	margin: auto;
+	vertical-align:center;
+}
+
+
+.faqItem7,.faqItem8,.faqItem9,.faqItem10,.faqItem11,.faqItem12 {
+    width: 300px;
+	height: 250px;
+    background-color: #fcd6ff;
+	font-size: 2.5em;
+	font-weight: bold;
+	border-radius: 20px;
+	text-align:center;
+	margin: auto;
+	vertical-align:center;
+}
+
+.faqItem13,.faqItem14,.faqItem15,.faqItem16,.faqItem17,.faqItem18 {
+    width: 300px;
+	height: 250px;
+    background-color: #e0ffd6;
+	font-size: 2.5em;
+	font-weight: bold;
+	border-radius: 20px;
+	text-align:center;
+	margin: auto;
+	vertical-align:center;
+}
+
+.faqItem1,.faqItem7,.faqItem13 { 
+	position: absolute;
+	top: 0px;
+	left: 20px;
+}
+
+.faqItem2,.faqItem8,.faqItem14 { 
+	position: absolute;
+	top: 0px;
+    left:0;
+    right:0;
+    margin:auto;
+}
+
+.faqItem3,.faqItem9,.faqItem15 { 
+	position: absolute;
+	top: 0px;
+	right: 20px;
+}
+
+.faqItem4,.faqItem10,.faqItem16 { 
+	position: absolute;
+	bottom: 0px;
+	left: 20px;
+}
+
+.faqItem5,.faqItem11,.faqItem17 { 
+	position: absolute;
+    bottom:0px;
+	left:0;
+    right:0;
+    margin:auto;
+}
+
+.faqItem6,.faqItem12,.faqItem18 { 
+	position: absolute;
+	bottom: 0px;
+	right: 20px;
+}
+
+[class^="faqDetail"] {
+    width:280px;
+    height:250px;
+    //background-color: #00ff23;
+    text-align:left;
+    position: absolute;
+    top:0;
+	left:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+}
+
+
+.question {
+    font-size:0.5em;
+}
+
+.answer {
+    font-size:0.5em;
+}
+
+div.faq {
+	width: 100%;
+	height: 1000px;
+	//background-color: #00ffff;
+	position: absolute;
+	top: 250px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+#faqDescription {
+	font-size: 4em;
+	color:#000;
+	position: absolute;
+	top: 100px;
+	left: 40px;
+	right: 0;
+	bottom: 0;
+	margin:0 auto;
+}
+
+.faqBtn1, .faqBtn2, .faqBtn3 {
+	background-color: #00ff23;
+	font-size: 2.8em;
+	width: 75%;
+    height: 200px;
+	color: #000000;
+	padding: 10px 30px;
+	text-align:center;
+}
+
+.faqBtn1 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 30px auto;
+}
+
+.faqBtn2 {
+	position: absolute;
+	top: 250px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 30px auto;
+}
+
+.faqBtn3 {
+	position: absolute;
+	top: 500px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 30px auto;
+}
+
+.tab, .content {
+	list-style-type: none
+}
+
+ul.tab{
+	width: 600px;
+	height: 100px;
+	font-size: 2em;
+	vertical-align:middle;
+	background-color: black;
+	font-weight: bold;
+	overflow:hidden;
+	position: absolute;
+	top: 150px;
+	right: 30px;
+	margin: auto;
+}
+
+#controller {
+	width: 150px;
+	height: 50px;
+	text-align:center;
+	vertical-align:middle;
+	position: absolute;
+	right: 250px;
+	margin: auto;
+}
+#career {
+	width: 150px;
+	height: 90px;
+	text-align:center;
+	vertical-align:middle;
+	position: absolute;
+	right: 30px;
+	margin: auto;
+}
+
+.tab li{background:#ccc; padding:5px 25px; float:left; margin-right:1px;}
+
+.tab li.select{background:#eee;}
+
+.content li{
+	width: 100%;
+	height: 100%;
+	//background:#eee; 
+	//padding:20px;
+}
+
+.hide {display:none;}
+
+.pic1 {
+	width : 800px;
+	height: 500px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+#footer {
+	position:fixed;
+	bottom: 0px;
+}
+
+.Reset { /* 親ボックス */
+	width: 100%;
+	height: 180px;
+	background-color: #0055ff;
+	margin-bottom: -10px;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+}
+
+
+.Return, .Release {
+	background-color: black;
+	font-size: 2em;
+	font-weight: bold;
+	width: 50%;
+	height: 180px;
+	color: #fff;
+	padding: 10px 30px;
+	text-align:center;
+}
+.Return {
+	position: absolute; 
+	left: 0;
+	margin: auto;
+}
+
+.Release {
+	position: absolute;
+	right: 0;
+	margin: auto;
+}

@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>カレンダー</title>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/i18n/jquery-ui-i18n.min.js"></script>
+	<script  type="text/javascript" src="calendarController.js" charset="UTF-8"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+	
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/start/jquery-ui.css" >
+	<link rel="stylesheet" type="text/css" href="../css/calendar.css">
+</head>
+<body>
+    <ul class="tab">
+        <li id="controller" class="select">コントローラー</li>
+        <li id="career">案内図</li>
+    </ul>
+    <ul class="content">
+        <li>
+            <div id="datepicker" />
+        </li>
+        <li class="hide"><img class="pic1" src="/picture/career.png" alt="画像1"></li>
+    </ul>
+
+    <div id="footer" class="Reset">
+        <button class="Return" type="submit">メインメニューに戻る</button>
+        <button class="Release" type="submit">接続解除</button>
+    </div>
+
+</body>
+</html>

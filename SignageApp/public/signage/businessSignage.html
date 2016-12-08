@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>新着求人情報</title>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script  type="text/javascript" src="courseSignage.js" charset="UTF-8"></script>
+	<link rel="stylesheet" type="text/css" href="/css/signage.css">
+</head>
+<body>
+	<p class="title">新着求人</p>
+	<div class="business">
+		<div class="businessSelect1">
+			<button class="busiBtn1" type="submit">建設業</button>
+			<button class="busiBtn2" type="submit">メーカー</button>
+		</div>
+		<div class="businessSelect2">
+			<button class="busiBtn3" type="submit">商社</button>
+			<button class="busiBtn4" type="submit">流通</button>
+		</div>
+		<div class="businessSelect3">
+			<button class="busiBtn5" type="submit">金融</button>
+			<button class="busiBtn6" type="submit">情報通信</button>
+		</div>
+		<div class="businessSelect4">
+			<button class="busiBtn7" type="submit">サービス</button>
+			<button class="busiBtn8" type="submit">その他</button>
+		</div>
+		<div id="footer" class="businessReset">
+			<!--<button class="businessBeforeReturn" type="submit">一つ前に戻る</button>-->
+			<button class="businessReturn" type="submit">メインメニューに戻る</button>
+			<button class="businessRelease" type="submit">接続解除</button>
+		</div>
+	</div>
+	
+	<div class="test2">
+	<li id="company"></li>
+	<div class="detail">
+	<ul><li id="business"></li></ul>
+	<ul><li id="place"></li></ul>
+	<ul><li id="content"></li></ul>
+	<ul><li id="tel"></li></ul>
+	<ul><li id="url"></li></ul>
+	</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+#viewer {
+    margin: auto auto;
+    width: 960px;
+    height: 400px;
+    text-align: center;
+    overflow: hidden;
+    font-size: 80px;
+}
+
+#viewer ul {
+    width: 960px;
+    height: 400px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+#viewer ul li {
+    top: 0;
+    left: 0;
+    width: 960px;
+    height: 400px;
+    display: none;
+    position: absolute;
+}
