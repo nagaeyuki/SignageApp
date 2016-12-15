@@ -101,6 +101,7 @@ for (var y = 0; y < averageList.length; y++) {
 }
 var averageList2 = [];
 var targetNumber;
+var recognition="";
 
 socket.on('bodyFrame', function (bodyFrame) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -136,7 +137,10 @@ socket.on('bodyFrame', function (bodyFrame) {
                         state.innerHTML = "stop";
                         range.innerHTML = "true";
                         approach.innerHTML = "stop";
-                        socket.emit("hitoiru", { "roomID2": "iru" });
+                        if (recognition != "stop") {
+                            socket.emit("stop");
+                        }
+                        recognition = "stop";
                     } else {
                         //min,max‚Ì”ÍˆÍ“à‚¾‚ª“®‚¢‚Ä‚¢‚éŽž
                         for (var i = 4; i < frame; i += 4) {
@@ -148,10 +152,16 @@ socket.on('bodyFrame', function (bodyFrame) {
                             approach.innerHTML = "leave";
                             state.innerHTML = "through";
                             range.innerHTML = "true";
+                           
                         } else {
                             approach.innerHTML = "approach";
                             state.innerHTML = "through";
                             range.innerHTML = "true";
+                            if (recognition != "through") {
+                                socket.emit("through");
+                            }
+                            recognition = "through";
+                           
                         }
                     }
                     //min,max‚Ì”ÍˆÍŠO‚Ìê‡
@@ -159,6 +169,10 @@ socket.on('bodyFrame', function (bodyFrame) {
                     range.innerHTML = "false";
                     state.innerHTML = "none";
                     approach.innerHTML = "none";
+                    if (recognition != "none") {
+                        socket.emit("none");
+                    }
+                    recognition = "none";
                 }
                 listZ[targetNumber].shift();
                 listX[targetNumber].shift();
@@ -230,7 +244,10 @@ setInterval(function () {
             listZ[i] = [];
             listX[i] = [];
             targetNumber = null;
-            socket.emit("hitoiru", { "roomID2": "inai" });
+            if (recognition != "none") {
+                socket.emit("none");
+            }
+            recognition = "none";
         }
     }
 }, 1000);

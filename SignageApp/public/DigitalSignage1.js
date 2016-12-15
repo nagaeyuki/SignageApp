@@ -1,6 +1,9 @@
 var socket = io.connect(location.origin);
 $(function () {
-    socket.on("iru", function (data) {
+    socket.on("through", function (data) {
+        document.location.href = "http://localhost:80/approach.html";    });
+
+    socket.on("stop", function (data) {
         document.location.href = "http://localhost:80/DigitalSignage2.html";    });
 
 });

@@ -2,8 +2,7 @@
 var socket = io.connect(location.origin);
 $(function () {
 
-    socket.on("inai", function (data) {
-        console.log("test");
+    socket.on("none", function (data) {
         document.location.href = "http://localhost:80/DigitalSignage1.html";    });
 
     socket.on("ConnectClear", function (data) {

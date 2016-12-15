@@ -30,6 +30,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="public\approach.js" />
     <Compile Include="public\controller\accordionController.js" />
     <Compile Include="public\controller\calendarController.js" />
     <Compile Include="public\controller\controller.js" />
@@ -61,6 +62,8 @@
     <Compile Include="server.js" />
     <Content Include="bin\Microsoft.NodejsTools.WebRole.dll" />
     <Content Include="package.json" />
+    <Content Include="public\approach.css" />
+    <Content Include="public\approach.html" />
     <Content Include="public\base.css" />
     <Content Include="public\controller\accordionController.html" />
     <Content Include="public\controller\calendarController.html" />

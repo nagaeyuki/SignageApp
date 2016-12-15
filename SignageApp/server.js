@@ -344,15 +344,16 @@ io.sockets.on("connection", function (socket) {
     });
 
 
-    socket.on("hitoiru", function (data) {
-        var roomID2 = data.roomID2;
-        if (roomID2 == "iru") {
+    socket.on("stop", function (data) {
+            io.sockets.emit("stop");
+    });
+    socket.on("none", function (data) {
+        io.sockets.emit("none");
+    });
 
-            io.sockets.emit("iru");
-        } else {
-            
-            io.sockets.emit("inai");
-        }
+    socket.on("through", function (data) {
+        io.sockets.emit("through");
+        
     });
 
 });

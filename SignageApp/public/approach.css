@@ -1,0 +1,19 @@
+
+
+#arrow{
+margin-top: 150px;
+display: block;
+ margin-left: auto;
+ margin-right: auto;
+}
+
+#comment{
+  position: fixed;
+  font-size: 32px;
+  text-align: center;
+
+  top: 560px;
+  left:100px;
+  right: 100px;
+
+}
