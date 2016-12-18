@@ -5,52 +5,24 @@
 <title>キャリアセンター前①</title>
 <script src="/socket.io/socket.io.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script  type="text/javascript" src="DigitalSignage1.js"></script>
+<script  type="text/javascript" src="DigitalSignage1.js" charset="Shift-JIS"></script>
 <link rel="stylesheet" type="text/css" href="DigitalSignage1.css">
 <link rel="stylesheet" type="text/css" href="base.css">
 </head>
 
-<body>
-    <div id="container">
+<body onload="getCSV()">
+  <div id="container">
 
-        <header>
-            <p id="name">愛知工業大学</p>
-            <p id="name2">キャリアセンター</p>
-        </header>
-        <h1 id="title">就活対策講座のご案内</h1>
-        <hr>
-        <div id="zone1">
-            <div id="viewer1">
-                <ul id="ul1">
-                    <li></li>
-                </ul>
-            </div>
-        </div>
-        <div id="zone2">
-        <div id="viewer2">
-            <ul id="ul2"></ul>
-
-        </div>
-        <div id="career">
-            <img id="pic1" src="/picture/career3.png" alt="画像1">
-            <p>
-                <b>①就職相談カウンター</b><br>
-                気になることがあったら迷わずここへ!
-            </p>
-            <p>
-                <b>②PCコーナー</b><br>
-                調べたいことがあるときに利用しよう
-            </p>
-            <p>
-                <b>③求人資料</b><br>
-                約5,000社の求人票やパンフレットが見れる!
-            </p>
-        </div>
-        <p id="eddystone">新着求人情報URL発信中<br>スマホでチェックしてみてね！</p>
-
-           
-
-
+<header>
+   <p id="name">愛知工業大学</p>
+    <p id="name2">キャリアセンター</p>
+  </header>
+    <h1 id="title">就活対策講座のご案内</h1>
+    <hr>
+    <div id="viewer">
+      <ul id="ul">
+        <li></li>
+</ul>
     </div>
   </div>
 </body>

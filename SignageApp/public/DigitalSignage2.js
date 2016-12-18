@@ -2,11 +2,11 @@
 var socket = io.connect(location.origin);
 $(function () {
 
-  /*  socket.on("none", function (data) {
+    socket.on("none", function (data) {
         document.location.href = "http://localhost:80/DigitalSignage1.html";    });
 
     socket.on("ConnectClear", function (data) {
-        document.location.href = "http://localhost:80/signage/pairingSignage.html";    });*/
+        document.location.href = "http://localhost:80/signage/pairingSignage.html";    });
 });
 function getCSV() {
     var req = new XMLHttpRequest(); // HTTPでファイルを読み込むためのXMLHttpRrequestオブジェクトを生成
