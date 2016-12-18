@@ -1,4 +1,8 @@
-#viewer {
+/*zone1*/
+#zone1{
+    display:none
+}
+#viewer1 {
     margin: auto auto;
     width: 960px;
     height: 400px;
@@ -7,7 +11,7 @@
     font-size: 80px;
 }
 
-#viewer ul {
+#viewer1 ul {
     width: 960px;
     height: 400px;
     text-align: center;
@@ -15,11 +19,69 @@
     position: relative;
 }
 
-#viewer ul li {
+#viewer1 ul li {
     top: 0;
     left: 0;
     width: 960px;
     height: 400px;
     display: none;
     position: absolute;
+}
+
+/*zone2*/
+#zone2{
+    display:none
+}
+#viewer2 {
+    width: 450px;
+    height: 300px;
+    text-align: left;
+    overflow: hidden;
+    float: left;
+    font-size: 40px;
+    margin-left: 60px;
+}
+
+#viewer2 ul {
+    width: 450px;
+    height: 300px;
+    text-align: left;
+    overflow: hidden;
+    position: relative;
+}
+
+#viewer2 ul li {
+    top: 0;
+    left: 0;
+    width: 450px;
+    height: 300px;
+    display: none;
+    position: absolute;
+}
+
+
+
+
+#career {
+    float: right;
+    margin-right: 30px;
+}
+
+#pic1 {
+    /*display: block;*/
+    width: 100%;
+    max-width: 400px;
+    min-width: 400px;
+}
+
+#eddystone {
+    float: left;
+    color: #0024FF;
+    font-size: 24px;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
+    padding: 40px;
+    border-radius: 12px;
+    margin-left: 30px;
+    margin-top: 100px;
 }
