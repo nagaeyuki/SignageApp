@@ -350,10 +350,14 @@ io.sockets.on("connection", function (socket) {
     socket.on("none", function (data) {
         io.sockets.emit("none");
     });
+    socket.on("move", function (data) {
+        io.sockets.emit("move");
+    });
 
-    socket.on("through", function (data) {
-        io.sockets.emit("through");
+    socket.on("distance", function (data) {
         
+        io.sockets.emit("distance", data);
+
     });
 
 });

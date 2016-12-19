@@ -81,6 +81,7 @@ function drawHand(jointPoint, handColor) {
 
 var frame = 45;
 var min = 80;
+var middle = 150;
 var max = 300;
 var move = 40;
 var flag = false;
@@ -124,14 +125,15 @@ socket.on('bodyFrame', function (bodyFrame) {
 
             var SpineMidZ = Math.floor(bodyFrame.bodies[bodyNumber].joints[1].cameraZ * 100);
             var SpineMidX = Math.floor(bodyFrame.bodies[bodyNumber].joints[1].cameraX * 100);
+           
 
             distance.innerHTML = SpineMidZ;
             listZ[bodyNumber].push(SpineMidZ);
             listX[bodyNumber].push(SpineMidX);
 
             if (targetNumber != null && listZ[targetNumber].length == frame) {          
-                //kinectÇ©ÇÁÇÃãóó£Ç™min,maxÇÃîÕàÕì‡
-                if (min < SpineMidZ && SpineMidZ < max) {
+                //kinectÇ©ÇÁÇÃãóó£Ç™min,middleÇÃîÕàÕì‡
+                if (min < SpineMidZ && SpineMidZ < middle) {
                     //óßÇøé~Ç‹Ç¡ÇƒÇ¢ÇÈÇ»ÇÁ
                     if (Math.abs(listZ[targetNumber][0] - listZ[targetNumber][frame - 1]) < move) {
                         state.innerHTML = "stop";
@@ -141,31 +143,19 @@ socket.on('bodyFrame', function (bodyFrame) {
                             socket.emit("stop");
                         }
                         recognition = "stop";
-                    } else {
-                        //min,maxÇÃîÕàÕì‡ÇæÇ™ìÆÇ¢ÇƒÇ¢ÇÈéû
-                        for (var i = 4; i < frame; i += 4) {
-                            if (listZ[targetNumber][0] < listZ[targetNumber][i]) {
-                                count++;
-                            }
-                        }
-                        if (count > 5) {
-                            approach.innerHTML = "leave";
-                            state.innerHTML = "through";
-                            range.innerHTML = "true";
-                           
-                        } else {
-                            approach.innerHTML = "approach";
-                            state.innerHTML = "through";
-                            range.innerHTML = "true";
-                            if (recognition != "through") {
-                                socket.emit("through");
-                            }
-                            recognition = "through";
-                           
-                        }
                     }
-                    //min,maxÇÃîÕàÕäOÇÃèÍçá
-                } else {
+                } else if (middle <= SpineMidZ && SpineMidZ <= max) {
+                    state.innerHTML = "move";
+                    range.innerHTML = "true";
+                    approach.innerHTML = "move";
+                    if (recognition != "move") {
+                        socket.emit("move");
+                    }
+                    recognition = "move";
+
+                    socket.emit("distance", SpineMidZ);
+                } else if (SpineMidZ > max) {
+               
                     range.innerHTML = "false";
                     state.innerHTML = "none";
                     approach.innerHTML = "none";
@@ -174,6 +164,7 @@ socket.on('bodyFrame', function (bodyFrame) {
                     }
                     recognition = "none";
                 }
+               
                 listZ[targetNumber].shift();
                 listX[targetNumber].shift();
             }
@@ -202,6 +193,7 @@ socket.on('bodyFrame', function (bodyFrame) {
         case 5: five.innerHTML = listZ[bodyNumber];
             break;
     }
+    
 
     bodyNumbertext.innerHTML = bodyNumberList;
 

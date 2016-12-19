@@ -4,6 +4,8 @@ $(function () {
 
     socket.on("none", function (data) {
         document.location.href = "http://localhost:80/DigitalSignage1.html";    });
+    socket.on("move", function (data) {
+        document.location.href = "http://localhost:80/DigitalSignage1.html";    });
 
     socket.on("ConnectClear", function (data) {
         document.location.href = "http://localhost:80/signage/pairingSignage.html";    });
