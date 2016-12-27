@@ -7,9 +7,11 @@ var leftPos = 0;
 var connect = 1;
 var check = 1;
 
-var urlTransition = ["http://192.168.53.41:80/signage/mainSignage.html", "http://192.168.53.41:80/DigitalSignage2.html"];
+var urlTransition = ["https://192.168.53.41:443/signage/mainSignage.html", "https://192.168.53.41:443/DigitalSignage2.html"];
 
 $(function () {
+
+    $('html,body').offset({ top:-150, left: -350 });
     
     //CSVファイルを読み込む関数getCSV()の定義
     function getCSV() {
@@ -59,14 +61,8 @@ $(function () {
         }
     }
     
-    console.log("できてます");
+    console.log("ok");
     getCSV(); //最初に実行される
-
-	$(".Btn1").click(function () {
-	//window.scrollBy(100,300) ;
-	$('body').animate({scrollTop: 400}, 1000, 'swing');
-	console.log("okok");
-    });
 
     socket.on("kyujinSelectFromServer", function (data) {
         num = data.selectNum;
@@ -75,60 +71,11 @@ $(function () {
     });
 
     function selectCheck() {
-        if (num <= 5) {
-            topPos = 120;
-        } else if (6 <= num && num <= 10) {
-            topPos = 820;
-        } else if (11 <= num && num <= 15) {
-            topPos = 1520;
-        } else if (16 <= num && num <= 20) {
-            topPos = 2220;
-        } else if (21 <= num && num <= 25) {
-            topPos = 2920;
-        } else if (26 <= num && num <= 30) {
-            topPos = 3620;
-        } else if (31 <= num && num <= 35) {
-            topPos = 4320;
-        } else if (36 <= num && num <= 40) {
-            topPos = 5020;
-        } else if (41 <= num && num <= 45) {
-            topPos = 5720;
-        } else if (46 <= num && num <= 50) {
-            topPos = 6420;
-        } else if (51 <= num && num <= 55) {
-            topPos = 7120;
-        } else if (56 <= num && num <= 60) {
-            topPos = 7820;
-        } else if (61 <= num && num <= 65) {
-            topPos = 8520;
-        } else if (66 <= num && num <= 70) {
-            topPos = 9220;
-        } else if (71 <= num && num <= 75) {
-            topPos = 9920;
-        } else if (76 <= num && num <= 80) {
-            topPos = 10620;
-        }
-        
-        switch (num % 5) {
-            case 1:
-                leftPos = 250;
-                break;
-            case 2:
-                leftPos = 1200;
-                break;
-            case 3:
-                leftPos = 2150;
-                break;
-            case 4:
-                leftPos = 3100;
-                break;
-            case 0:
-                leftPos = 4050;
-                break;
-        }
-        console.log("top"+ topPos +"left"+leftPos);
-        $('html,body').animate({ scrollTop: topPos+"px", scrollLeft: leftPos+"px" }, 2000, "swing");
-        
+        var off = $('.kyujin' + num).offset();
+        topPos = off.top - 200;
+        leftPos = off.left - 375;
+        console.log("top:" + topPos + "left:" + leftPos);
+        $('html,body').animate({ scrollTop: topPos + "px", scrollLeft: leftPos + "px" }, 2000, "swing");
     }
     
     socket.on("ReturnFromServer", function (data) {
@@ -139,7 +86,7 @@ $(function () {
     socket.on("ConnectCut", function (data) {
         if (connect == 1) {
             socket.emit("EndConnect");
-            window.location.href = urlTransition[0];
+            window.location.href = urlTransition[1];
             console.log("miss");
         }
         

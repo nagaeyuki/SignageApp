@@ -1,43 +1,35 @@
-@import "compass/css3";
-
-
+﻿
 body {
-  background-color: #06efb6;
+  background-color:  #F0F8FF;
 }
 
-#pairingDescription {	font-size: 4em;	color:#000;	position: absolute;	top: 100px;	left: 40px;	right: 0;	bottom: 0;	margin:0 auto;}div.pairing {	width: 100%;	height: 200px;	//background-color: #ffff40;	position: relative;	top: 350px;	bottom: 0;}   #roomID {	width: 500px;	height: 150px;	font-size: 5em;	padding: 10px 50px;	text-align: center;	position: absolute;	top: 0;	left: 30px;	bottom: 0;	margin: auto; }  .pairingButton {	width: 250px;;	height: 100px;	font-size: 2.2em;	position: absolute;	top: 0;	right: 50px;	bottom: 0;	margin: auto; }
+#pairingDescription {	font-size: 4em;	color:#000;	position: absolute;	top: 100px;	left: 40px;	right: 0;	bottom: 0;	margin:0 auto;}div.pairing {	width: 100%;	height: 200px;	//background-color: #ffff40;	position: relative;	top: 350px;	bottom: 0;}   #roomID {	width: 500px;	height: 150px;	font-size: 5em;	padding: 10px 50px;	text-align: center;	position: absolute;	top: 0;	left: 30px;	bottom: 0;	margin: auto;    border-width : 3px;
+    border-style : solid;
+    border-color : #666666; }  .pairingButton {	width: 250px;;	height: 100px;	font-size: 2.2em;    color:#fff;    background-color:#000;	position: absolute;	top: 0;	right: 50px;	bottom: 0;	margin: auto;    border-radius: 20px; }
 
- div.main {
+.mainController {
 	width: 100%;
-	height: 1000px;
+	height: 700px;
 	//background-color: #00ffff;
 	position: absolute;
-	top: 250px;
+	top: 100px;
 	left: 0;
 	right: 0;
 	bottom: 0;
 	margin: auto;
 }
 
-#mainDescription {
-	font-size: 4em;
-	color:#000;
-	position: absolute;
-	top: 100px;
-	left: 40px;
-	right: 0;
-	bottom: 0;
-	margin:0 auto;
-}
+
 
 .menuBtn1, .menuBtn2, .menuBtn3 {
-	background-color: #00ff23;
+	background-color: #000080;
 	font-size: 2.8em;
 	width: 75%;
     height: 200px;
-	color: #000000;
+	color: #fff;
 	padding: 10px 30px;
 	text-align:center;
+    border-radius: 20px;
 }
 
 .menuBtn1 {
@@ -77,13 +69,17 @@ body {
   font-size:2.8em;
 }
 
+.class-sunday {
+    background-color:green;
+    color:red;
+}
 
 .accordion {
   width: 90%;
   margin: 20px auto;
   background-color: #fff;
   position:absolute;
-  top:200px;
+  top:250px;
   left:0;
   right:0;
   @include box-sizing(border-box);
@@ -93,7 +89,7 @@ body {
 
 .scroll {
   position: relative;
-  height: 500px; 
+  height: 700px; 
   padding: 10px;
   overflow: auto;
 }
@@ -118,6 +114,7 @@ dt{
   font-size : 2.7em;
   font-weight : bold;
 
+
   margin-top:10px;
   margin-bottom : 10px;
    
@@ -140,14 +137,15 @@ dd{
   font-size : 2em;
   line-height: 5;  
   margin-bottom : 7.5px;  
-  color:#fff;
-  background-color: #2564e6;  
+  color:#000;
+  background-color: #8de5f8; 
   text-align:center;
-  vertical-align:central;
+  //vertical-align:central;
  
   border-bottom-width : 1px;
   border-bottom-style : solid;
-  border-bottom-color : #fff;    
+  border-bottom-color : #fff;  
+   
 
   //padding-left : 50px;
   //padding-right : 15px;
@@ -157,7 +155,7 @@ dd{
 .bottomMenu {
     width:90%;
     height:150px;
-    background-color:#fff;
+    //background-color:#fff;
     position:absolute;
     bottom:200px;
     left:0;
@@ -167,21 +165,24 @@ dd{
 }
 
 .obog {
-    width:65%;
+    width:70%;
     height:150px;
-    background-color:#2564e6;
+    color:#fff;
+    background-color:#6e92dc;
     position:absolute;
     left:0;
 }
 
 .url {
     font-size:2em;
-    width:30%;
+    width:27%;
     height:150px;
-     background-color:#ff6a00;
+     background-color:#000080;
+     color:#fff;
     position:absolute;
     right:0;
      text-align:center;
+     border-radius: 20px;
 }
 
 
@@ -193,40 +194,31 @@ dd{
     margin:auto;
 }
 
-div.faq {
+.faqController {
 	width: 100%;
-	height: 1000px;
+	height: 700px;
 	//background-color: #00ffff;
 	position: absolute;
-	top: 250px;
+	top: 100px;
 	left: 0;
 	right: 0;
 	bottom: 0;
 	margin: auto;
 }
 
-#faqDescription {
-	font-size: 4em;
-	color:#000;
-	position: absolute;
-	top: 100px;
-	left: 40px;
-	right: 0;
-	bottom: 0;
-	margin:0 auto;
-}
 
 .faqBtn1, .faqBtn2, .faqBtn3 {
-	background-color: #00ff23;
 	font-size: 2.8em;
 	width: 75%;
     height: 200px;
 	color: #000000;
 	padding: 10px 30px;
 	text-align:center;
+    border-radius: 20px;
 }
 
 .faqBtn1 {
+    background-color: #d6eaff;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -236,6 +228,7 @@ div.faq {
 }
 
 .faqBtn2 {
+    background-color: #fcd6ff;
 	position: absolute;
 	top: 250px;
 	left: 0;
@@ -245,6 +238,7 @@ div.faq {
 }
 
 .faqBtn3 {
+    background-color: #e0ffd6;
 	position: absolute;
 	top: 500px;
 	left: 0;
@@ -256,10 +250,10 @@ div.faq {
 
 #footer {
 	position:fixed;
-	bottom: 0px;
+	bottom: 0;
 }
 
-.Reset { /* 親ボックス */
+.mainReset { /* 親ボックス */
 	width: 100%;
 	height: 180px;
 	background-color: #0055ff;
@@ -270,15 +264,26 @@ div.faq {
 }
 
 .mainRelease {
-    width:500px;
-    height:180px;
-    font-size:2em;
-    background-color:#000;
-    color:#fff;
-    position:absolute;
-    top:1000px;
-    left:30px;
+	background-color: black;
+	font-size: 2em;
+	font-weight: bold;
+	width: 100%;
+	height: 180px;
+	color: #fff;
+	padding: 10px 30px;
+	text-align:center;
 }
+
+.Reset { /* 親ボックス */
+	width: 100%;
+	height: 180px;
+	//background-color: #0055ff;
+	margin-bottom: -10px;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+}
+
 
 .Return, .Release {
 	background-color: black;
@@ -298,6 +303,78 @@ div.faq {
 
 .Release {
 	position: absolute;
+	right: 0;
+	margin: auto;
+}
+
+.tab, .content {
+	list-style-type: none
+}
+ul.tab{
+	width: 600px;
+	height: 100px;
+	font-size: 2em;
+	vertical-align:middle;
+	//background-color: black;
+	font-weight: bold;
+	overflow:hidden;
+	position: absolute;
+	top: 150px;
+	right: 30px;
+	margin: auto;
+     border-bottom-width : 1px;
+     border-bottom-style : solid;
+    border-bottom-color : #000000;  
+}
+
+#controller {
+	width: 230px;
+	height: 90px;
+	text-align:center;
+	vertical-align:middle;
+	position: absolute;
+	right: 230px;
+	margin: auto;
+}
+#career {
+	width: 150px;
+	height: 90px;
+	text-align:center;
+	vertical-align:middle;
+	position: absolute;
+	right: 30px;
+	margin: auto;
+}
+
+.tab li{background:#ccc; padding:5px 25px; float:left; margin-right:1px;}
+
+.tab li.select{background:#eee;}
+
+.content li{
+	width: 100%;
+	height: 100%;
+	//background:#eee; 
+	//padding:20px;
+}
+
+.hide {display:none;}
+
+.pic1 {
+	width : 800px;
+	height: 500px;
+	position: absolute;
+	top: 300px;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+.pic2 {
+	width : 800px;
+	height: 500px;
+	position: absolute;
+	top: 800px;
+	left: 0;
 	right: 0;
 	margin: auto;
 }

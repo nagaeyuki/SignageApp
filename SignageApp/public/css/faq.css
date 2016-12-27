@@ -5,8 +5,8 @@ body {
 #faqTitle {
 	font-size: 2.5em;
 	position: absolute;
-	top: 50px;
-	left: 150px;
+	top: 60px;
+	left: 70px;
 	margin: auto;
 }
 
@@ -40,9 +40,11 @@ body {
 }
 
 .faq1,.faq2,.faq3 {
-	width: 1000px;
+	width: 950px;
 	height: 550px;
 	//background-color: #0055ff;
+    position:absolute;
+    left:25px;
 }
 
 .slideFoward {
@@ -94,13 +96,13 @@ body {
 
 .faqItem1,.faqItem7,.faqItem13 { 
 	position: absolute;
-	top: 0px;
-	left: 20px;
+	top: 15px;
+	left: 10px;
 }
 
 .faqItem2,.faqItem8,.faqItem14 { 
 	position: absolute;
-	top: 0px;
+	top: 15px;
     left:0;
     right:0;
     margin:auto;
@@ -108,19 +110,19 @@ body {
 
 .faqItem3,.faqItem9,.faqItem15 { 
 	position: absolute;
-	top: 0px;
-	right: 20px;
+	top: 15px;
+	right: 10px;
 }
 
 .faqItem4,.faqItem10,.faqItem16 { 
 	position: absolute;
-	bottom: 0px;
-	left: 20px;
+	bottom: 15px;
+	left: 10px;
 }
 
 .faqItem5,.faqItem11,.faqItem17 { 
 	position: absolute;
-    bottom:0px;
+    bottom:15px;
 	left:0;
     right:0;
     margin:auto;
@@ -128,8 +130,8 @@ body {
 
 .faqItem6,.faqItem12,.faqItem18 { 
 	position: absolute;
-	bottom: 0px;
-	right: 20px;
+	bottom: 15px;
+	right: 10px;
 }
 
 [class^="faqDetail"] {

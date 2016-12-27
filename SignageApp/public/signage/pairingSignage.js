@@ -11,7 +11,7 @@ var connect = 1;
 var check = 1;
 
 
-var urlTransition = ["http://192.168.53.41:80/signage/mainSignage.html", "http://192.168.53.41:80/DigitalSignage2.html"];
+var urlTransition = ["https://192.168.53.41:443/signage/mainSignage.html", "https://192.168.53.41:443/DigitalSignage2.html"];
 
 // roomIDに入室
 socket.emit("pairingFromSignage", { "roomID": roomID });
@@ -44,7 +44,7 @@ $(function () {
     });
     
     socket.on("Restart", function (dataFromServer) {
-        document.location.href = "http://localhost:80/DigitalSignage2.html";
+        document.location.href = "http://192.168.53.41:443/DigitalSignage2.html";
     });
     
 	//接続解除命令が来た時
@@ -76,7 +76,7 @@ $(function () {
         socket.emit("pairingSuccessFromSignage");
         //console.log(number);
         //テストページに遷移
-        window.location.href = urlTransition[0];
+        document.location.href = "https://192.168.53.41:443/signage/mainSignage.html";
         console.log("ペアリング完了しました");
         //console.log(roomID);
         //number = 1;

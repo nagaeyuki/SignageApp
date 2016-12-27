@@ -7,8 +7,8 @@ body {
 .careerTitle {
     font-size:2.5em;
     position:absolute;
-    top:50px;
-    left:150px;
+    top:70px;
+    left:120px;
 }
 
 .careerMessage {
@@ -21,7 +21,7 @@ body {
 .contents {
   width: 700px;
   margin: 20px auto;
-  background-color: #fff;
+  background-color: #d6eaff;
   position:absolute;
   top: 150px;
   left: 100px;
@@ -31,7 +31,7 @@ body {
 }
 .scroll {
   position: relative;
-  height: 400px; 
+  height: 400px;
   padding: 10px;
   overflow: auto;
 }
@@ -51,7 +51,7 @@ body {
   font-weight : bold;
 
   margin-bottom : 10px;
-   
+
   border-bottom-width : 1px;
   border-bottom-style : solid;
   border-bottom-color : #666666;
@@ -71,17 +71,15 @@ body {
   font-size: 1.3em;
 }
 
-.line{  
+.line{
   border-bottom-width : 1px;
   border-bottom-style : solid;
-  border-bottom-color : #000000;  
-  
-  padding-bottom : 10px;      
+  border-bottom-color : #000000;
+
+  padding-bottom : 10px;
 }
 
-.chara {
-  padding-left : 100px;
-}
+
 
 .name {
   font-weight:bold;
@@ -90,12 +88,12 @@ body {
 
 .test {
   font-size : 100%;
-  line-height : 1.8;    
-  //margin-bottom : 45px;    
- 
+  line-height : 1.8;
+  //margin-bottom : 45px;
+
   border-bottom-width : 1px;
   border-bottom-style : dotted;
-  border-bottom-color : #999999;    
+  border-bottom-color : #999999;
 
   padding-left : 230px;
   padding-right : 15px;
@@ -103,12 +101,12 @@ body {
 
 .time {
   font-size : 1.5em;
-  line-height : 1.8;    
-  //margin-bottom : 45px;    
- 
+  line-height : 1.8;
+  //margin-bottom : 45px;
+
   border-bottom-width : 1px;
   border-bottom-style : dotted;
-  border-bottom-color : #999999;    
+  border-bottom-color : #999999;
 
   padding-left : 230px;
   padding-right : 15px;
@@ -140,7 +138,7 @@ ul.tab{
 	margin: auto;
      border-bottom-width : 1px;
      border-bottom-style : solid;
-    border-bottom-color : #000000;  
+    border-bottom-color : #000000;
 }
 
 #controller {
@@ -169,7 +167,7 @@ ul.tab{
 .content li{
 	width: 100%;
 	height: 100%;
-	//background:#eee; 
+	//background:#eee;
 	//padding:20px;
 }
 
@@ -213,7 +211,7 @@ ul.tab{
 	text-align:center;
 }
 .Return {
-	position: absolute; 
+	position: absolute;
 	left: 0;
 	margin: auto;
 }
@@ -222,4 +220,9 @@ ul.tab{
 	position: absolute;
 	right: 0;
 	margin: auto;
+}
+
+p:not(#name)
+{
+  padding-left : 100px;
 }

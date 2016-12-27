@@ -30,21 +30,13 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="public\approach.js" />
-    <Compile Include="public\controller\accordionController.js" />
-    <Compile Include="public\controller\calendarController.js" />
-    <Compile Include="public\controller\controller.js" />
-    <Compile Include="public\controller\courseController.js" />
-    <Compile Include="public\controller\faqController.js" />
+    <Compile Include="public\controller\alertController.js" />
     <Compile Include="public\controller\footerFixed.js" />
-    <Compile Include="public\controller\kyujinController.js" />
-    <Compile Include="public\controller\kyujinDetailController.js" />
-    <Compile Include="public\controller\mainController.js" />
-    <Compile Include="public\controller\pairingController.js" />
-    <Compile Include="public\controller\questionController.js" />
+    <Compile Include="public\controller\testController.js" />
     <Compile Include="public\c\controller.js" />
     <Compile Include="public\DigitalSignage1.js" />
     <Compile Include="public\DigitalSignage2.js" />
+    <Compile Include="public\js\header.js" />
     <Compile Include="public\js\kinect.js" />
     <Compile Include="public\js\GrayscaleImageWorker.js" />
     <Compile Include="public\js\pako.inflate.min.js" />
@@ -62,23 +54,12 @@
     <Compile Include="server.js" />
     <Content Include="bin\Microsoft.NodejsTools.WebRole.dll" />
     <Content Include="package.json" />
-    <Content Include="public\approach.css" />
-    <Content Include="public\approach.html" />
     <Content Include="public\base.css" />
-    <Content Include="public\controller\accordionController.html" />
-    <Content Include="public\controller\calendarController.html" />
+    <Content Include="public\controller\alertController.html" />
     <Content Include="public\controller\controller.html" />
-    <Content Include="public\controller\courseController.html" />
-    <Content Include="public\controller\faqController.html" />
-    <Content Include="public\controller\kyujinController.html" />
-    <Content Include="public\controller\kyujinDetailController.html" />
-    <Content Include="public\controller\mainController.html" />
-    <Content Include="public\controller\pairingController.html" />
-    <Content Include="public\controller\questionController.html" />
     <Content Include="public\css\accordion.css" />
     <Content Include="public\css\board.css" />
     <Content Include="public\css\calendar.css" />
-    <Content Include="public\css\controller.css" />
     <Content Include="public\css\course.css" />
     <Content Include="public\css\faq.css" />
     <Content Include="public\css\kyujin.css" />
@@ -86,6 +67,7 @@
     <Content Include="public\css\pairing.css" />
     <Content Include="public\css\question.css" />
     <Content Include="public\css\signage.css" />
+    <Content Include="public\css\test.css" />
     <Content Include="public\csv\courseData2016.csv" />
     <Content Include="public\csv\course_2016.csv" />
     <Content Include="public\csv\event.csv" />
@@ -97,7 +79,6 @@
     <Content Include="public\DigitalSignage1.html" />
     <Content Include="public\DigitalSignage2.css" />
     <Content Include="public\DigitalSignage2.html" />
-    <Content Include="public\index.html" />
     <Content Include="public\kinect.html" />
     <Content Include="public\picture\0012.png" />
     <Content Include="public\picture\0019.png" />

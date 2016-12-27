@@ -143,6 +143,7 @@ socket.on('bodyFrame', function (bodyFrame) {
                             socket.emit("stop");
                         }
                         recognition = "stop";
+                        socket.emit("distance2", SpineMidZ);
                     }
                 } else if (middle <= SpineMidZ && SpineMidZ <= max) {
                     state.innerHTML = "move";

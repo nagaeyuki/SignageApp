@@ -8,15 +8,14 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 <script  type="text/javascript" src="DigitalSignage2.js" charset="utf-8"></script>
+<script src="./js/header.js"></script>
 <link rel="stylesheet" type="text/css" href="DigitalSignage2.css">
 <link rel="stylesheet" type="text/css" href="base.css">
 </head>
 <body onload="getCSV()">
   <div id="container">
 
-<header>
-   <p id="name">愛知工業大学</p>
-    <p id="name2">キャリアセンター</p>
+<header id="header">
   </header>
   <h1 id="title">就活対策講座のご案内</h1>
 <hr>
@@ -35,9 +34,11 @@
      <p><b>③求人資料</b><br>
      約5,000社の求人票やパンフレットが見れる!</p>
 </div>
- <p id="eddystone">新着求人情報URL発信中<br>スマホでチェックしてみてね！</p>
+      <div id="eddystone">
+          <p>サイネージを操作するための準備<br>1.Bluetoothをon<br>2.Wi-Fiに接続<br>3.スマホのChrome通知欄をチェック<br></p>
+          <p id="pairingCode">ペアリングコード:</p>
 
-
+      </div>
 
 
 </div>

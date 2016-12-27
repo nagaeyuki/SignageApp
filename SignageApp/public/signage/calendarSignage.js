@@ -7,7 +7,7 @@ var number = 0;
 
 var connect = 1;
 var check = 1;
-var urlTransition = ["http://192.168.53.41:80/signage/mainSignage.html", "http://192.168.53.41:80/DigitalSignage2.html"];
+var urlTransition = ["https://192.168.53.41:443/signage/mainSignage.html", "https://192.168.53.41:443/DigitalSignage2.html"];
 
 $(function() {
 
@@ -90,7 +90,7 @@ $(".scroll").scrollTop(pos.top + 1);
     socket.on("ConnectCut", function (data) {
         if (connect == 1) {
             socket.emit("EndConnect");
-            window.location.href = urlTransition[0];
+            window.location.href = urlTransition[1];
             console.log("miss");
         }
         

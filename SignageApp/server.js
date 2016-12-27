@@ -2,13 +2,15 @@
     //express.HTTPServer のインスタンスを生成するには createServer() メソッドを呼び出すだけです
     express = require('express'),
     app = express(),
-    server = require('http').createServer(app),
-    io = require('socket.io').listen(server),
+    //server = require('http').createServer(app),
+    //io = require('socket.io').listen(server),
     zlib = require('zlib');
 var kinect = new Kinect2();
 
 // httpモジュールの読み込み
-var http = require("http");
+//var http = require("http");
+// httpsモジュールの読み込み
+var https = require("https");
 // fsモジュールの読み込み
 var fs = require("fs");
 // pathモジュールの読み込み
@@ -26,13 +28,35 @@ var path = require("path");
 
 
 //require('http').createServer(requestListener);
-var port = 80;
-server.listen(port);
+/*var port = 80;
+server.listen(port);*/
+var options = {
+    key: fs.readFileSync('server_key.pem'),
+    cert: fs.readFileSync('server_crt.pem')
+};
+//var server_http = http.createServer(app);
+var server_https = https.createServer(options, app);
+
+//io = require('socket.io').listen(server_https);
+
+
+
+//require('http').createServer(requestListener);
+//var http_port = 80;
+var https_port = 443;
+
+//server_http.listen(http_port);
+server_https.listen(https_port);
+//var port = 80;
+//server.listen(port);
+
 
 if (kinect.open()) {
 
-    console.log('Server listening on port' + port);
-    console.log('Point your browser to http://localhost:' + port);
+  //console.log('Server listening on port' + http_port);
+  //console.log('Point your browser to http://localhost:' + http_port);
+  console.log('Server listening on port' + https_port);
+  console.log('Point your browser to http://localhost:' + https_port);
 
     //depth
     app.use(express.static(__dirname + '/public'));
@@ -117,7 +141,8 @@ function requestListener(request, response) {
 
 
 eddystone = require('eddystone-beacon');
-eddystone.advertiseUrl('http://goo.gl/1DwQAB');
+//eddystone.advertiseUrl('http://goo.gl/1DwQAB');
+eddystone.advertiseUrl('https://goo.gl/2WyUt3');
 
 /**
  * ファイルの読み込み
@@ -152,6 +177,11 @@ function readFileHandler(fileName, contentType, isBinary, response) {
         }
     });
 }
+
+var io = require('socket.io').listen(server_https, {
+    key: fs.readFileSync('server_key.pem').toString(),
+    cert: fs.readFileSync('server_crt.pem').toString()
+});
 
 // サーバーへのアクセスを監視。アクセスがあったらコールバックが実行
 io.sockets.on("connection", function (socket) {
@@ -317,7 +347,7 @@ io.sockets.on("connection", function (socket) {
         console.log("ConnectCheck");
         setTimeout(function () {
             io.sockets.emit("ConnectCut");
-        }, 5000);
+        }, 10000);
     });
 
     socket.on("ConfirmTest2", function (data) {
@@ -355,8 +385,14 @@ io.sockets.on("connection", function (socket) {
     });
 
     socket.on("distance", function (data) {
-        
+
         io.sockets.emit("distance", data);
+
+    });
+
+    socket.on("distance2", function (data) {
+
+        io.sockets.emit("distance2", data);
 
     });
 

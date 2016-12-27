@@ -1,19 +1,25 @@
 var socket = io.connect(location.origin);
 $(function () {
+
+    var off = $("#image1").offset();
+    var top = off.top + 150;
+    var left = off.left + 150;
+
     socket.on("stop", function (data) {
-        console.log("aa");
-        document.location.href = "http://localhost:80/DigitalSignage2.html";    });
+        document.location.href = "https://192.168.53.41:443/DigitalSignage2.html";    });
     socket.on("none", function (data) {
-        $(function () {            $('#image2').css({
-                'width': '0px', 'height': '0px'
+        $(function () {            $('#image2').css({                'width': '0px', 'height': '0px'
+
             });
         });    });
     socket.on("distance", function (data) {
 
         var size = ($("#image1").width() - data) * 2;
+        var size2 = size / 2;
         $(function () {            $('#image2').css({
                 'width': size, 'height': size
             });
+            $('#image2').offset({ top: top - size2, left: left - size2 });
         });    });
 });
 
