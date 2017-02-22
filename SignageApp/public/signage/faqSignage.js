@@ -73,27 +73,7 @@ $(function () {
     socket.on("Restart", function (data) {
         window.location.href = urlTransition[1];        console.log("mainRestart");    });
 
-	//接続解除命令が来た時
-	socket.on("ConnectCut", function (data) {
-        if (connect == 1) {
-            socket.emit("EndConnect");
-            window.location.href = urlTransition[1];
-            console.log("miss");
-        }
-        
-        if (check = 2) {
-            connect = 1;
-            check = 1;
-        } else {
-            connect = 2;
-            check = 2;
-        }
-    });
-    
-	//ユーザが反応して接続解除をやめさせる時
-    socket.on("DontStop", function (data) {
-        connect = 2;
-    });
+    //接続解除命令が来た時    socket.on("ConnectStop", function (data) {        window.location.href = urlTransition[1];    });
 	
 	
 	function slideCheck(faqNum) {
@@ -187,6 +167,23 @@ $(function () {
             }
 
         }
-	}
+    }
+
+    moveArrow2();
+
+    function moveArrow2() {
+        $("#arrow")
+            .animate({
+                'margin-left': '-50px',
+            }, 2000)
+            .animate({
+                opacity: 0
+            }, 500)
+            .animate({
+                'margin-left': '0px',
+                opacity: 1
+            }, 0);
+        setTimeout(moveArrow2, 1500); //アニメーションを繰り返す間隔
+    }
 
 });

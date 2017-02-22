@@ -4,7 +4,7 @@ var ctx = canvas.getContext('2d');
 var distance = document.getElementById('distance');
 var state = document.getElementById('state');
 var range = document.getElementById('range');
-var approach = document.getElementById('approach');
+//var approach = document.getElementById('approach');
 var target = document.getElementById('target');
 var zero = document.getElementById('zero');
 var one = document.getElementById('one');
@@ -13,7 +13,7 @@ var three = document.getElementById('three');
 var four = document.getElementById('four');
 var five = document.getElementById('five');
 var bodyNumbertext = document.getElementById('bodyNumbertext');
-var averageText = document.getElementById('averageList');
+//var averageText = document.getElementById('averageList');
 
 
 //depth
@@ -138,7 +138,7 @@ socket.on('bodyFrame', function (bodyFrame) {
                     if (Math.abs(listZ[targetNumber][0] - listZ[targetNumber][frame - 1]) < move) {
                         state.innerHTML = "stop";
                         range.innerHTML = "true";
-                        approach.innerHTML = "stop";
+                       // approach.innerHTML = "stop";
                         if (recognition != "stop") {
                             socket.emit("stop");
                         }
@@ -148,7 +148,7 @@ socket.on('bodyFrame', function (bodyFrame) {
                 } else if (middle <= SpineMidZ && SpineMidZ <= max) {
                     state.innerHTML = "move";
                     range.innerHTML = "true";
-                    approach.innerHTML = "move";
+                    //approach.innerHTML = "move";
                     if (recognition != "move") {
                         socket.emit("move");
                     }
@@ -159,7 +159,7 @@ socket.on('bodyFrame', function (bodyFrame) {
                
                     range.innerHTML = "false";
                     state.innerHTML = "none";
-                    approach.innerHTML = "none";
+                   // approach.innerHTML = "none";
                     if (recognition != "none") {
                         socket.emit("none");
                     }
@@ -222,7 +222,7 @@ socket.on('bodyFrame', function (bodyFrame) {
         }
     }
 
-    averageText.innerHTML = averageList;
+    //averageText.innerHTML = averageList;
     averageList2 = [];
 
 });

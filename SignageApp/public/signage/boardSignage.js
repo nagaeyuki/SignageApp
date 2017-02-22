@@ -11,12 +11,12 @@ var urlTransition = ["https://192.168.53.41:443/signage/mainSignage.html", "http
 
 $(function () {
 
-    $('html,body').offset({ top:-150, left: -350 });
+    $('html,body').offset({ top:-190, left: -350 });
     
     //CSVファイルを読み込む関数getCSV()の定義
     function getCSV() {
         var req = new XMLHttpRequest(); // HTTPでファイルを読み込むためのXMLHttpRrequestオブジェクトを生成
-        req.open("get", "../csv/kyujin.csv", true); // アクセスするファイルを指定
+        req.open("get", "../csv/kyujinTest.csv", true); // アクセスするファイルを指定
         req.send(null); // HTTPリクエストの発行
         
         // レスポンスが返ってきたらconvertCSVtoArray()を呼ぶ
@@ -38,9 +38,9 @@ $(function () {
         for (var i = 1; i <= 80 ; i++) {
             
             //$(".kyujin" + i).text(result[i][1]);
-            $(".kyujin" + i).append($("<img/>").attr({ "src": "../picture/pin005.png" }));
-            $("img").attr('id', 'img'+i);
-            $("img").addClass("img");
+            //$(".kyujin" + i).append($("<img/>").attr({ "src": "../picture/pin005.png" }));
+           // $("img").attr('id', 'img'+i);
+            //$("img").addClass("img");
 
             $(".kyujin" + i).append('<h1>' + result[i][1] + '</h1>');
             $('h1').addClass("company");
@@ -64,6 +64,7 @@ $(function () {
     console.log("ok");
     getCSV(); //最初に実行される
 
+
     socket.on("kyujinSelectFromServer", function (data) {
         num = data.selectNum;
         console.log(num);
@@ -72,8 +73,8 @@ $(function () {
 
     function selectCheck() {
         var off = $('.kyujin' + num).offset();
-        topPos = off.top - 200;
-        leftPos = off.left - 375;
+        topPos = off.top - 50;
+        leftPos = off.left - 200;
         console.log("top:" + topPos + "left:" + leftPos);
         $('html,body').animate({ scrollTop: topPos + "px", scrollLeft: leftPos + "px" }, 2000, "swing");
     }
@@ -82,27 +83,23 @@ $(function () {
         window.location.href = urlTransition[0];        console.log("Restart");    });
 
     socket.on("Restart", function (data) {
-        window.location.href = urlTransition[1];        console.log("mainRestart");    });    //接続解除命令が来た時
-    socket.on("ConnectCut", function (data) {
-        if (connect == 1) {
-            socket.emit("EndConnect");
-            window.location.href = urlTransition[1];
-            console.log("miss");
-        }
-        
-        if (check = 2) {
-            connect = 1;
-            check = 1;
-        } else {
-            connect = 2;
-            check = 2;
-        }
-    });
-    
-    //ユーザが反応して接続解除をやめさせる時
-    socket.on("DontStop", function (data) {
-        connect = 2;
-    });
-		
+        window.location.href = urlTransition[1];        console.log("mainRestart");    });    //接続解除命令が来た時    socket.on("ConnectStop", function (data) {        window.location.href = urlTransition[1];    });
+
+    moveArrow2();
+
+    function moveArrow2() {
+        $("#arrow")
+            .animate({
+                'margin-left': '-50px',
+            }, 2000)
+            .animate({
+                opacity: 0
+            }, 500)
+            .animate({
+                'margin-left': '0px',
+                opacity: 1
+            }, 0);
+        setTimeout(moveArrow2, 1500); //アニメーションを繰り返す間隔
+    }
 
 });

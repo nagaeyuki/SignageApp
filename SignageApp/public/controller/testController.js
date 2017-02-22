@@ -20,18 +20,25 @@ var forClass3 = ['2016-04-11', '2016-04-13', '2016-04-14', '2016-04-15', '2016-0
 var forClassW = ['2016-07-11', '2016-07-14'];
 var check = 0;
 
-var time_limit = 30 * 1000;
-
 $(function () {
 
     $('body').bind('touchend', function () {
-        //alert("touchend");
-        clearInterval(testTimer);
-        testTimer = setInterval(timer, time_limit);
+        socket.emit("ConnectNow");
     });
 
-    //一定時間ごとに接続確認
-    testTimer = setInterval(timer, time_limit);
+   
+    socket.on("ConnectCheck", function (data) {
+        alert("操作を続けますか？");
+        socket.emit("ConnectContinue");
+    });
+
+    socket.on("ConnectStop", function (data) {
+        $("#controller").hide();
+        $('.content li').css('display', 'none');
+        $('.content li').eq(1).css('display', 'block');
+        $(".mainReset").hide();
+        $(".Reset").hide();
+    });
 
     pairingSet();
     getCSV();
@@ -251,7 +258,7 @@ $(function () {
 
     $(".mainRelease").click(function () {
             socket.emit("FlagReset");
-            alert("mainRelease");
+            lastSet();
             socketCut = 1;
             socket.disconnect();
     });
@@ -266,33 +273,12 @@ $(function () {
     $(".Release").click(function () {
         //if (socketCut == 0) {
             socket.emit("FlagReset");
-            alert("Release");
+            lastSet();
             socketCut = 1;
             socket.disconnect();
         //}
     });
 
-    //一定時間ごとに接続確認
-    /*testTimer = setInterval(function () {
-        if (connection == 0) {
-            socket.emit("ConnectCheck");
-            alert("繋がってますか？");
-            socket.emit("ConnectNow");
-            console.log("connection:" + connection);
-        }
-
-    }, 500000000);*/
-
-    socket.on("ConnectEnd", function (data) {
-        //window.open('about:blank','_self').close();
-        //アラート止める処理
-        connection = 1;
-        clearInterval(testTimer);
-        console.log("ConnectEnd");
-        //切断後ボタン無効に
-        socketCut = 1;
-        socket.disconnect();
-    });
 
      //クリックしたときのファンクションをまとめて指定
     $('.tab li').click(function () {
@@ -376,14 +362,20 @@ function faqSet() {
     $(".content").show();
 }
 
-function timer() {
-    if (connection == 0) {
-        socket.emit("ConnectCheck");
-        alert("繋がってますか？");
-        socket.emit("ConnectNow");
-        console.log("connection:" + connection);
-    }
+function lastSet() {
+    $(".pairingController").hide();
+    $(".mainController").hide();
+    $(".mainReset").hide();
+    $("#datepicker").hide();
+    $(".accordionController").hide();
+    $(".faqController").hide();
+    $(".Reset").hide();
+    $(".tab").show();
+    $(".content").show();
+    $(".select").hide();
+    $(".hide").show();
 }
+
 
 //CSVファイルを読み込む関数getCSV()の定義
 function getCSV() {

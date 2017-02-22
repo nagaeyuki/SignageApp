@@ -1,4 +1,4 @@
-@import "compass/css3";
+//@import "compass/css3";
 
 body {
   background-color: #d6eaff;
@@ -6,9 +6,9 @@ body {
 
 .careerTitle {
     font-size:2.5em;
-    position:absolute;
-    top:70px;
-    left:120px;
+    position:relative;
+    top:50px;
+    left:50px;
 }
 
 .careerMessage {
@@ -18,13 +18,32 @@ body {
     top:300px;
     right:100px;
 }
+
+#induction{
+   position: fixed;
+  font-size: 32px;
+  text-align: center;
+
+  top: 620px;
+  left:180px;
+  right: 100px;
+  color:red;
+}
+
+#arrow {
+    width:100px;
+    height:70px;
+    position:fixed;
+    top:632px;
+    left:250px
+}
+
 .contents {
   width: 700px;
   margin: 20px auto;
   background-color: #d6eaff;
-  position:absolute;
-  top: 150px;
-  left: 100px;
+  position:relative;
+  top: 80px;
   @include box-sizing(border-box);
   @include border-radius(4px);
   @include box-shadow(0 1px 10px rgba(#000,.5));
@@ -226,3 +245,4 @@ p:not(#name)
 {
   padding-left : 100px;
 }
+

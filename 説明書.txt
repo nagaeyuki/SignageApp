@@ -1,0 +1,6 @@
+1. SignageApp.slnをVisualStudioから起動
+2. 実行
+3. PCのブラウザからhttps://aitech.ac.jp/hislab/DigitalSignage1.html("aitech.ac.jp/hislab"はIPアドレス)に接続
+4. 別のタブ（ウィンドウ）からhttps://aitech.ac.jp/hislab/kinect.htmlを開いておくこと（このページを開いておかないとKinectでの検出結果を送れない）
+5. Kinectに近づきページをDigitalSignage2.htmlに変化させる
+6. スマホをPCと同じLANに接続、BluetoothをON、Chromeの通知欄のURLをタップ（Androidの場合位置情報をONに）

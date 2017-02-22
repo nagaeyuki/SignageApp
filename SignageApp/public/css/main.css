@@ -3,27 +3,25 @@ body {
 }
 
 #mainTitle {
-	font-size: 3.5em;
-	position: absolute;
-	top: 70px;
-	left: 70px;
-	margin: auto;
+    font-size:2.8em;
+    position:relative;
+    left:20px;
 }
 
 #mainMessage {
-	font-size: 2em;
-	position: absolute;
-	top: 100px;
-	right: 80px;
-	margin: auto;
+    font-size:1.5em;
+    position:relative;
+    top:-30px;
+    left:600px;
 }
 
+
 div.mainSignage {
-	width: 80%;
+	width: 800px;
 	height: 450px;
 	background-color: #9febf6;
     
-   position: fixed;
+   position: absolute;
 	top: 120px;
 	left: 0;
 	right: 0;
@@ -31,44 +29,48 @@ div.mainSignage {
 	margin: auto;
 }
 
-ol li{
-    margin: 0 auto;
+.menuText1 {
+    //background-color: #cbe497;
+	width: 800px;
+    height: 150px;
 	position: absolute;
-	left: 100px;
-    
+	top: 0;
+	margin: auto;
 }
 
 
+.menuText2 {
+    //background-color: #e7b0f2;
+	width: 800px;
+    height: 150px;
+	position: absolute;
+	top: 0;
+    bottom:0;
+	margin: auto;
+}
 
-.menuText1, .menuText2, .menuText3 {
-    //background-color: #000080;
-	
-	font-size: 4em;
-	font-family: sans-serif;
-	font-weight: bold;
-	//width: 27%;
-	//height: 72%;
-	width: 100%;
-    height: 110px;
-	color: #000;
-	padding: 10px 10px;
-	text-align:center;
-	position: relative;
-	top: 10px;
-	left: 0;
-	right: 0;
+.menuText3 {
+    //background-color: #f8cb4d;
+	width: 800px;
+    height: 150px;
+	position: absolute;
 	bottom: 0;
 	margin: auto;
 }
 
-hr.sideLine {
-    border: 0;
-	width: 100%;
-    height: 1px;
-    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
-    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
-    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
-    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+
+#mText1, #mText2, #mText3 {
+    font-size: 3.8em;
+	font-family: sans-serif;
+	font-weight: bold;
+    position:absolute;
+    left:70px;
+    top: 45px;
+	margin: auto;
+}
+
+.menuText1, .menuText2 {
+    border-bottom:1px solid #000;
 }
 
 

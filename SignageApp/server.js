@@ -144,6 +144,7 @@ eddystone = require('eddystone-beacon');
 //eddystone.advertiseUrl('http://goo.gl/1DwQAB');
 eddystone.advertiseUrl('https://goo.gl/2WyUt3');
 
+
 /**
  * ファイルの読み込み
  */
@@ -183,6 +184,26 @@ var io = require('socket.io').listen(server_https, {
     cert: fs.readFileSync('server_crt.pem').toString()
 });
 
+var testTimer;
+var cutTimer;
+var time_limit = 30 * 1000;
+var cut_limit = 10 * 1000;
+
+
+function loop() {
+    //console.log("testNumber:" + testNumber);
+    console.log("ConnectCut");
+    io.sockets.emit("ConnectCheck");
+    cutTimer = setTimeout(stop, cut_limit);
+
+}
+
+function stop() {
+    clearInterval(testTimer);
+    io.sockets.emit("ConnectStop");
+    console.log("stop");
+}
+
 // サーバーへのアクセスを監視。アクセスがあったらコールバックが実行
 io.sockets.on("connection", function (socket) {
   var roomID;
@@ -199,6 +220,8 @@ io.sockets.on("connection", function (socket) {
     var date = 0;
     var month = 0;
     var clickNum = 0;
+    var socketID;
+    
 
     socket.on("kyujinSelect", function (data) {
         clickNum = data.clickNum;
@@ -222,19 +245,16 @@ io.sockets.on("connection", function (socket) {
     //コントローラーに接続されたとき
     socket.on("ConnectStart", function (data) {
         io.sockets.emit("ConnectClear");
+        testTimer = setInterval(loop, time_limit);
         console.log("ConnectStart");
     });
-
-    //コントローラーに接続されなかったとき
-	/*socket.on("ConnectCancel", function (data) {
-        io.sockets.emit("ConnectFailed");
-        console.log("ConnectCancel");
-    });*/
 
     //pairingSignageからのpairingFromSignageというデータを受信（サイネージのペアリング）
     socket.on("pairingFromSignage", function (data) {
         roomID = data.roomID;
+        socketID = socket.id;
         socket.join(roomID);
+        console.log(data);
     });
 
     //pairingControllerからのpairingFromControllerというデータを受信（コントローラーのペアリングイベント）
@@ -262,56 +282,10 @@ io.sockets.on("connection", function (socket) {
         io.sockets.emit("courseStartFromServer");
     });
 
-    //courseControllerからのcourseNumberFromControllerというデータを受信
-    socket.on("courseNumberFromController", function (data) {
-        courseNumber = data.courseNumber;
-        console.log("courseNumber:" + courseNumber);
-        io.sockets.emit("courseNumberFromServer", { "courseNum": courseNumber });
-    });
-
-	/*//courseSignageからのcourseDetailFromSignageというデータを受信
-	socket.on("courseDetailFromSignage", function (data) {
-		courseDetail = data.courseDetail;
-		console.log("courseDetail:" + courseDetail);
-        io.sockets.emit("courseDetailFromServer",{"courseDetail" : courseDetail });
-    });*/
-
-    //mainControllerからのbusinessStartFromControllerというデータを受信
-    socket.on("businessStartFromController", function (data) {
-        io.sockets.emit("businessStartFromServer");
-    });
-
-    //kyujinControllerからのbusinessNumberFromControllerというデータを受信
-    socket.on("businessNumberFromController", function (data) {
-        businessNumber = data.businessNumber;
-        console.log("businessNumber:" + businessNumber);
-        io.sockets.emit("businessNumberFromServer", { "businessNum": businessNumber });
-    });
-
     //mainControllerからのkyujinStartFromControllerというデータを受信
     socket.on("kyujinStartFromController", function (data) {
         io.sockets.emit("kyujinStartFromServer");
     });
-
-    //kyujinControllerからのkyujinNumberFromControllerというデータを受信
-    socket.on("kyujinNumberFromController", function (data) {
-        kyujinNumber = data.kyujinNumber;
-        console.log("kyujinNumber:" + kyujinNumber);
-        io.sockets.emit("kyujinNumberFromServer", { "kyujinNum": kyujinNumber });
-    });
-
-    //kyujinControllerからのobogFromControllerというデータを受信
-    socket.on("obogFromController", function (data) {
-        io.sockets.emit("obogFromServer");
-    });
-
-    //kyujinControllerからのgenreFromControllerというデータを受信
-    socket.on("genreFromController", function (data) {
-        genre = data.genreNumber;
-        console.log("genreNumber:" + genre);
-        io.sockets.emit("genreFromServer", { "genreNum": genre });
-    });
-
 
     //mainControllerからのfaqStartFromControllerというデータを受信
     socket.on("faqStartFromController", function (data) {
@@ -339,43 +313,27 @@ io.sockets.on("connection", function (socket) {
     //ユーザが反応したら接続解除をやめさせる
     socket.on("ConnectNow", function (data) {
         io.sockets.emit("DontStop");
+        clearInterval(testTimer);
+        testTimer = setInterval(loop, time_limit);
         console.log("ConnectNow");
     });
 
     //一定時間ごとに接続解除命令
-    socket.on("ConnectCheck", function (data) {
-        console.log("ConnectCheck");
-        setTimeout(function () {
-            io.sockets.emit("ConnectCut");
-        }, 10000);
-    });
-
-    socket.on("ConfirmTest2", function (data) {
-        console.log("ConfirmTest2");
-        setTimeout(function () {
-            io.sockets.emit("ConnectCut2");
-        }, 5000);
+    socket.on("ConnectContinue", function (data) {
+        console.log("ConnectContinue");
+        clearTimeout(cutTimer);
+        //testTimer = setInterval(loop, time_limit);
     });
 
     socket.on("FlagReset", function (data) {
         console.log("flag");
         io.sockets.emit("Restart");
-        //io.sockets.emit("ConnectEnd3");
     });
 
-    socket.on("EndConnect", function (data) {
-        io.sockets.emit("ConnectEnd");
-        console.log("ConnectEnd");
-    });
-
-    socket.on("EndConnect2", function (data) {
-        io.sockets.emit("ConnectEnd2");
-        console.log("ConnectEnd2");
-    });
 
 
     socket.on("stop", function (data) {
-            io.sockets.emit("stop");
+        io.sockets.emit("stop");
     });
     socket.on("none", function (data) {
         io.sockets.emit("none");

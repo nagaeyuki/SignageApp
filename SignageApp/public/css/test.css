@@ -166,7 +166,7 @@ dd{
 
 .obog {
     width:70%;
-    height:150px;
+    height:160px;
     color:#fff;
     background-color:#6e92dc;
     position:absolute;
@@ -175,9 +175,10 @@ dd{
 
 .url {
     font-size:2em;
+    font-weight:bold;
     width:27%;
     height:150px;
-     background-color:#000080;
+     background-color:#4747ed;
      color:#fff;
     position:absolute;
     right:0;
