@@ -7,36 +7,36 @@ var leftPos = 0;
 var connect = 1;
 var check = 1;
 
-var urlTransition = ["https://192.168.53.41:443/signage/mainSignage.html", "https://192.168.53.41:443/DigitalSignage2.html"];
+var urlTransition = ["https://iothis.aitech.ac.jp/signage/mainSignage.html", "https://iothis.aitech.ac.jp/DigitalSignage2.html"];
 
 $(function () {
 
     $('html,body').offset({ top:-190, left: -350 });
-    
-    //CSVƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚ŞŠÖ”getCSV()‚Ì’è‹`
+
+    //CSVãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€é–¢æ•°getCSV()ã®å®šç¾©
     function getCSV() {
-        var req = new XMLHttpRequest(); // HTTP‚Åƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ş‚½‚ß‚ÌXMLHttpRrequestƒIƒuƒWƒFƒNƒg‚ğ¶¬
-        req.open("get", "../csv/kyujinTest.csv", true); // ƒAƒNƒZƒX‚·‚éƒtƒ@ƒCƒ‹‚ğw’è
-        req.send(null); // HTTPƒŠƒNƒGƒXƒg‚Ì”­s
-        
-        // ƒŒƒXƒ|ƒ“ƒX‚ª•Ô‚Á‚Ä‚«‚½‚çconvertCSVtoArray()‚ğŒÄ‚Ô
+        var req = new XMLHttpRequest(); // HTTPã§ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€ãŸã‚ã®XMLHttpRrequestã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆ
+        req.open("get", "../csv/kyujinTest.csv", true); // ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æŒ‡å®š
+        req.send(null); // HTTPãƒªã‚¯ã‚¨ã‚¹ãƒˆã®ç™ºè¡Œ
+
+        // ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãŒè¿”ã£ã¦ããŸã‚‰convertCSVtoArray()ã‚’å‘¼ã¶
         req.onload = function () {
-            convertCSVtoArray(req.responseText); // “n‚³‚ê‚é‚Ì‚Í“Ç‚İ‚ñ‚¾CSVƒf[ƒ^
+            convertCSVtoArray(req.responseText); // æ¸¡ã•ã‚Œã‚‹ã®ã¯èª­ã¿è¾¼ã‚“ã CSVãƒ‡ãƒ¼ã‚¿
         }
     }
-    
-    // “Ç‚İ‚ñ‚¾CSVƒf[ƒ^‚ğ“ñŸŒ³”z—ñ‚É•ÏŠ·‚·‚éŠÖ”convertCSVtoArray()‚Ì’è‹`
-    function convertCSVtoArray(str) { // “Ç‚İ‚ñ‚¾CSVƒf[ƒ^‚ª•¶š—ñ‚Æ‚µ‚Ä“n‚³‚ê‚é
-        var result = []; // ÅI“I‚È“ñŸŒ³”z—ñ‚ğ“ü‚ê‚é‚½‚ß‚Ì”z—ñ
-        var tmp = str.split("\n"); // ‰üs‚ğ‹æØ‚è•¶š‚Æ‚µ‚Äs‚ğ—v‘f‚Æ‚µ‚½”z—ñ‚ğ¶¬
-        
-        // Šes‚²‚Æ‚ÉƒJƒ“ƒ}‚Å‹æØ‚Á‚½•¶š—ñ‚ğ—v‘f‚Æ‚µ‚½“ñŸŒ³”z—ñ‚ğ¶¬
+
+    // èª­ã¿è¾¼ã‚“ã CSVãƒ‡ãƒ¼ã‚¿ã‚’äºŒæ¬¡å…ƒé…åˆ—ã«å¤‰æ›ã™ã‚‹é–¢æ•°convertCSVtoArray()ã®å®šç¾©
+    function convertCSVtoArray(str) { // èª­ã¿è¾¼ã‚“ã CSVãƒ‡ãƒ¼ã‚¿ãŒæ–‡å­—åˆ—ã¨ã—ã¦æ¸¡ã•ã‚Œã‚‹
+        var result = []; // æœ€çµ‚çš„ãªäºŒæ¬¡å…ƒé…åˆ—ã‚’å…¥ã‚Œã‚‹ãŸã‚ã®é…åˆ—
+        var tmp = str.split("\n"); // æ”¹è¡Œã‚’åŒºåˆ‡ã‚Šæ–‡å­—ã¨ã—ã¦è¡Œã‚’è¦ç´ ã¨ã—ãŸé…åˆ—ã‚’ç”Ÿæˆ
+
+        // å„è¡Œã”ã¨ã«ã‚«ãƒ³ãƒã§åŒºåˆ‡ã£ãŸæ–‡å­—åˆ—ã‚’è¦ç´ ã¨ã—ãŸäºŒæ¬¡å…ƒé…åˆ—ã‚’ç”Ÿæˆ
         for (var i = 0; i < tmp.length; ++i) {
             result[i] = tmp[i].split(',');
         }
-        
+
         for (var i = 1; i <= 80 ; i++) {
-            
+
             //$(".kyujin" + i).text(result[i][1]);
             //$(".kyujin" + i).append($("<img/>").attr({ "src": "../picture/pin005.png" }));
            // $("img").attr('id', 'img'+i);
@@ -50,19 +50,19 @@ $(function () {
             $(".detail" + i).append('<p>' + result[i][5] + '</p>');
             $(".detail" + i).append('<p>' + result[i][6] + '</p>');
             $(".detail" + i).append('<p>' + result[i][7] + '</p>');
-            $(".kyujin" + i).append('<h2>ƒRƒ“ƒgƒ[ƒ‰‚ÌURLƒ{ƒ^ƒ“‚ÅŠé‹Æ‚Ìƒz[ƒ€ƒy[ƒW‚ğŒ©‚ç‚ê‚Ü‚·</h2>');
+            $(".kyujin" + i).append('<h2>ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã®URLãƒœã‚¿ãƒ³ã§ä¼æ¥­ã®ãƒ›ãƒ¼ãƒ ãƒšãƒ¼ã‚¸ã‚’è¦‹ã‚‰ã‚Œã¾ã™</h2>');
             $('h2').addClass("urlText");
 
 
             if (result[i][9]==1) {
-                $(".kyujin" + i).append('<p>ƒLƒƒƒŠƒAƒZƒ“ƒ^[‚Éƒpƒ“ƒtƒŒƒbƒg‚ ‚è‚Ü‚·</p>');
+                $(".kyujin" + i).append('<p>ã‚­ãƒ£ãƒªã‚¢ã‚»ãƒ³ã‚¿ãƒ¼ã«ãƒ‘ãƒ³ãƒ•ãƒ¬ãƒƒãƒˆã‚ã‚Šã¾ã™</p>');
                 $('p:last').addClass("text");
             }
         }
     }
-    
+
     console.log("ok");
-    getCSV(); //Å‰‚ÉÀs‚³‚ê‚é
+    getCSV(); //æœ€åˆã«å®Ÿè¡Œã•ã‚Œã‚‹
 
 
     socket.on("kyujinSelectFromServer", function (data) {
@@ -78,12 +78,12 @@ $(function () {
         console.log("top:" + topPos + "left:" + leftPos);
         $('html,body').animate({ scrollTop: topPos + "px", scrollLeft: leftPos + "px" }, 2000, "swing");
     }
-    
+
     socket.on("ReturnFromServer", function (data) {
-        window.location.href = urlTransition[0];        console.log("Restart");    });
+        window.location.href = urlTransition[0];        console.log("Restart");    });
 
     socket.on("Restart", function (data) {
-        window.location.href = urlTransition[1];        console.log("mainRestart");    });    //Ú‘±‰ğœ–½—ß‚ª—ˆ‚½    socket.on("ConnectStop", function (data) {        window.location.href = urlTransition[1];    });
+        window.location.href = urlTransition[1];        console.log("mainRestart");    });    //æ¥ç¶šè§£é™¤å‘½ä»¤ãŒæ¥ãŸæ™‚    socket.on("ConnectStop", function (data) {        window.location.href = urlTransition[1];    });
 
     moveArrow2();
 
@@ -99,7 +99,7 @@ $(function () {
                 'margin-left': '0px',
                 opacity: 1
             }, 0);
-        setTimeout(moveArrow2, 1500); //ƒAƒjƒ[ƒVƒ‡ƒ“‚ğŒJ‚è•Ô‚·ŠÔŠu
+        setTimeout(moveArrow2, 1500); //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ç¹°ã‚Šè¿”ã™é–“éš”
     }
 
 });

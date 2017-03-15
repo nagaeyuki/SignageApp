@@ -22,17 +22,17 @@ body {
     left:320px;
 }
 
+
 .arrowBox {
-	//display: table-cell;
+
     background-color:#ffffff;
     width:750px;
     height:120px;
     position:fixed;
     top:590px;
     left:255px;
-    border-radius: 25px;     
+    border-radius: 25px;
 }
-
 .base {
     //background-color:#808080;
     width: 5370px;
@@ -60,7 +60,7 @@ body {
     bottom:0;
     left:200px;
     margin:auto;
-} 
+}
 .kyujin2,.kyujin7,.kyujin12,.kyujin17,.kyujin22,.kyujin27,.kyujin32,.kyujin37,.kyujin42,.kyujin47,.kyujin52,.kyujin57,.kyujin62,.kyujin67,.kyujin72,.kyujin77 {
     width:750px; height:500px;
     margin:5px; padding:10px; border:1px solid black;
@@ -70,7 +70,7 @@ body {
     bottom:0;
     left:1150px;
     margin:auto;
-} 
+}
 .kyujin3,.kyujin8,.kyujin13,.kyujin18,.kyujin23,.kyujin28,.kyujin33,.kyujin38,.kyujin43,.kyujin48,.kyujin53,.kyujin58,.kyujin63,.kyujin68,.kyujin73,.kyujin78 {
     width:750px; height:500px;
     margin:5px; padding:10px; border:1px solid black;
@@ -80,7 +80,7 @@ body {
     bottom:0;
     left:2100px;
     margin:auto;
-} 
+}
 .kyujin4,.kyujin9,.kyujin14,.kyujin19,.kyujin24,.kyujin29,.kyujin34,.kyujin39,.kyujin44,.kyujin49,.kyujin54,.kyujin59,.kyujin64,.kyujin69,.kyujin74,.kyujin79 {
     width:750px; height:500px;
     margin:5px; padding:10px; border:1px solid black;
@@ -90,7 +90,7 @@ body {
     bottom:0;
     left:3050px;
     margin:auto;
-} 
+}
 .kyujin5,.kyujin10,.kyujin15,.kyujin20,.kyujin25,.kyujin30,.kyujin35,.kyujin40,.kyujin45,.kyujin50,.kyujin55,.kyujin60,.kyujin65,.kyujin70,.kyujin75,.kyujin80 {
     width:750px; height:500px;
     margin:5px; padding:10px; border:1px solid black;

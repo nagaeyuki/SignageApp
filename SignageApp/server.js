@@ -31,8 +31,10 @@ var path = require("path");
 /*var port = 80;
 server.listen(port);*/
 var options = {
-    key: fs.readFileSync('server_key.pem'),
-    cert: fs.readFileSync('server_crt.pem')
+   key: fs.readFileSync('iothis.key'),
+    cert: fs.readFileSync('iothis.crt')
+    //key: fs.readFileSync('server_key.pem'),
+    //cert: fs.readFileSync('server_crt.pem')
 };
 //var server_http = http.createServer(app);
 var server_https = https.createServer(options, app);
@@ -73,6 +75,7 @@ if (kinect.open()) {
                         socket.volatile.emit('depthFrame', buffer);
                     });
                 }
+
 
 
                 compressing = false;
@@ -131,9 +134,11 @@ function requestListener(request, response) {
         case ".gif":
             readFileHandler(requestURL, "image/gif", true, response);
             break;
+
         default:
             // どこにも該当しない場合は、controller.htmlを読み込む
             readFileHandler("controller.html", "text/html", false, response);
+
             break;
     }
 }
@@ -141,10 +146,9 @@ function requestListener(request, response) {
 
 
 eddystone = require('eddystone-beacon');
-//eddystone.advertiseUrl('http://goo.gl/1DwQAB');
-eddystone.advertiseUrl('https://goo.gl/2WyUt3');
-
-
+//eddystone.advertiseUrl('https://v.gd/znZMyn');//クッションページを送信
+//eddystone.advertiseUrl('https://goo.gl/KX8qQZ');
+eddystone.advertiseUrl('https://v.gd/erfQ03');
 /**
  * ファイルの読み込み
  */
@@ -180,9 +184,10 @@ function readFileHandler(fileName, contentType, isBinary, response) {
 }
 
 var io = require('socket.io').listen(server_https, {
-    key: fs.readFileSync('server_key.pem').toString(),
-    cert: fs.readFileSync('server_crt.pem').toString()
+    key: fs.readFileSync('iothis.key').toString(),
+    cert: fs.readFileSync('iothis.crt').toString()
 });
+
 
 var testTimer;
 var cutTimer;
@@ -221,7 +226,7 @@ io.sockets.on("connection", function (socket) {
     var month = 0;
     var clickNum = 0;
     var socketID;
-    
+
 
     socket.on("kyujinSelect", function (data) {
         clickNum = data.clickNum;
@@ -230,9 +235,9 @@ io.sockets.on("connection", function (socket) {
     });
 
     socket.on("dateCalendar", function (data) {
-        date = data.dateText;
-        console.log(date);
-        io.sockets.emit("dateCalendarFromServer", { "dateNum": date });
+        //date = data.dateText;
+        console.log(data);
+        io.sockets.emit("dateCalendarFromServer", { "dateNum": data });
     });
 
     socket.on("ChangeMonth", function (data) {

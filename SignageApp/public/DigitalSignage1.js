@@ -6,7 +6,7 @@ $(function () {
     var left = off.left + 150;
 
     socket.on("stop", function (data) {
-        document.location.href = "https://192.168.53.41:443/DigitalSignage2.html";    });
+        document.location.href = "https://iothis.aitech.ac.jp/DigitalSignage2.html";    });
     socket.on("none", function (data) {
         $(function () {            $('#image2').css({                'width': '0px', 'height': '0px'
 

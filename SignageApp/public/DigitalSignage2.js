@@ -21,16 +21,16 @@ var distance = 0;
 $(function () {
 
     socket.on("none", function (data) {
-        document.location.href = "https://192.168.53.41:443/DigitalSignage1.html";    });
+        document.location.href = "https://iothis.aitech.ac.jp/DigitalSignage1.html";    });
     socket.on("move", function (data) {
         if (distance == 100){
-            document.location.href = "https://192.168.53.41:443/DigitalSignage1.html";        }    });
+            document.location.href = "https://iothis.aitech.ac.jp/DigitalSignage1.html";        }    });
 
     socket.on("distance2", function (data) {
         console.log(data);        //distance = data;    });
 
     socket.on("ConnectClear", function (data) {
-        document.location.href = "https://192.168.53.41:443/signage/pairingSignage.html";    });
+        document.location.href = "https://iothis.aitech.ac.jp/signage/pairingSignage.html";    });
 
     //roomID = $("#roomID").val();
     //var roomID = 1234;
@@ -57,7 +57,7 @@ $(function () {
     });
 
     socket.on("Restart", function (dataFromServer) {
-        document.location.href = "http://192.168.53.41:443/DigitalSignage2.html";
+        document.location.href = "http://iothis.aitech.ac.jp/DigitalSignage2.html";
     });
     
     //接続解除命令が来た時
@@ -87,7 +87,7 @@ $(function () {
         socket.emit("pairingSuccessFromSignage");
         //console.log(number);
         //テストページに遷移
-        document.location.href = "https://192.168.53.41:443/signage/mainSignage.html";
+        document.location.href = "https://iothis.aitech.ac.jp/signage/mainSignage.html";
         console.log("ペアリング完了しました");
         //console.log(roomID);
         //number = 1;

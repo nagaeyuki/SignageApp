@@ -1,41 +1,46 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8" />
 	<title>就職支援スケジュール</title>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script  type="text/javascript" src="calendarSignage.js" charset="Shift_JIS"></script>
+
+	<script src="../js/header.js"></script>
+	
+	<script type="text/javascript" src="calendarSignage.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="../css/calendar.css">
-    <script src="../js/header.js"></script>
-    <link rel="stylesheet" type="text/css" href="../base.css">
+	<link rel="stylesheet" type="text/css" href="../base.css">
 </head>
+
 <body>
-    <div id="container">
-        <header id="header"></header>
-        <div class="careerTitle">就職支援スケジュール一覧</div>
-        <div class="careerMessage"></div>
-
-        <div class="contents">
-            <!--<ul class="nav">
-              <li><a href="javascript:void(0)" class="jump">c1</a></li>
-              <li><a href="javascript:void(0)" class="jump">c2</a></li>
-              <li><a href="javascript:void(0)" class="jump">c3</a></li>
-              <li><a href="javascript:void(0)" class="jump">c4</a></li>
-              <li><a href="javascript:void(0)" class="jump">c5</a></li>
-              <li><a href="javascript:void(0)" class="jump">c6</a></li>
-            </ul>-->
-
-            <div class="scroll">
-                <h1 class="month" id="c4">4月</h1>
-                <div class="base">
-                    <p id="season1"></p>
-                    <p id="courseName1"></p>
-                    <p id="place1"></p>
-                    <p id="time1" class="line"></p>
-                </div>
-
-                <h1 class="month" id="c5">5月</h1>
+	<div id="container">
+		<header id="header"></header>
+		<div class="careerTitle">就職支援スケジュール一覧</div>
+		<div class="contents">
+			<div class="scroll">
+				<h1 class="month" id="c4">4月</h1>
+				<h1 class="month" id="c5">5月</h1>
+				<h1 class="month" id="c6">6月</h1>
+				<h1 class="month" id="c7">7月</h1>
+				<h1 class="month" id="c8">8月</h1>
+				<h1 class="month" id="c9">9月</h1>
+				<h1 class="month" id="c10">10月</h1>
+				<h1 class="month" id="c11">11月</h1>
+				<h1 class="month" id="c12">12月</h1>
+				<h1 class="month" id="c1">1月</h1>
+				<h1 class="month" id="c2">2月</h1>
+				<h1 class="month" id="c3">3月</h1>
+			</div>
+		</div>
+	<img id="arrow" src="/picture/arrow2.png" />
+		<p id="induction">詳しい内容や予約は相談カウンターにどうぞ</p>
+</div>
+</body>
+</html>
+<!-- <h1 class="month" id="c5">5月</h1>
                 <div class="base">
                     <p id="season2"></p>
                     <p id="courseName2"></p>
@@ -246,11 +251,4 @@
                     <p id="courseName33"></p>
                     <p id="place33"></p>
                     <p id="time33" class="line"></p>
-                </div>
-            </div>
-        </div>
-        <img id="arrow" src="/picture/arrow2.png" />
-        <p id="induction">詳しい内容や予約は相談カウンターにどうぞ</p>
-        </div>
-</body>
-</html>
+                </div> -->

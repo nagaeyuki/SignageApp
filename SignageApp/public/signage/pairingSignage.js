@@ -44,7 +44,7 @@ $(function () {
     });
     
     socket.on("Restart", function (dataFromServer) {
-        document.location.href = "http://192.168.53.41:443/DigitalSignage2.html";
+        document.location.href = "http://iothis.aitech.ac.jp/DigitalSignage2.html";
     });
     
 	//接続解除命令が来た時
@@ -76,7 +76,7 @@ $(function () {
         socket.emit("pairingSuccessFromSignage");
         //console.log(number);
         //テストページに遷移
-        document.location.href = "https://192.168.53.41:443/signage/mainSignage.html";
+        document.location.href = "https://iothis.aitech.ac.jp/signage/mainSignage.html";
         console.log("ペアリング完了しました");
         //console.log(roomID);
         //number = 1;
