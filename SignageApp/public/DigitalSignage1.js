@@ -1,26 +1,45 @@
 var socket = io.connect(location.origin);
 $(function () {
 
-    var off = $("#image1").offset();
-    var top = off.top + 150;
-    var left = off.left + 150;
+    // var off = $("#image1").offset();
+    // var top = off.top + 150;
+    // var left = off.left + 150;
+var max =0;
+var middle=0;
+socket.on("max", function(data){
+  max=data;
+});
+socket.on("middle", function(data){
+  middle=data;
+});
 
     socket.on("stop", function (data) {
-        document.location.href = "https://iothis.aitech.ac.jp/DigitalSignage2.html";    });
+        document.location.href = "https://iothis.aitech.ac.jp/DigitalSignage2.html";    });
     socket.on("none", function (data) {
-        $(function () {            $('#image2').css({                'width': '0px', 'height': '0px'
-
-            });
-        });    });
-    socket.on("distance", function (data) {
-
-        var size = ($("#image1").width() - data) * 2;
-        var size2 = size / 2;
         $(function () {            $('#image2').css({
-                'width': size, 'height': size
+              'width': '0px', 'height': '0px'
             });
-            $('#image2').offset({ top: top - size2, left: left - size2 });
         });    });
+    socket.on("distance", function (data) {
+      //現在の距離に対する画像のパーセンテージ
+      var ratio = 1-(data-middle)/(max-middle);
+      console.log(ratio);
+      console.log($('#image2').width());
+      $(function(){
+        $('#image2').css({
+          'width':$('#image1').width()*ratio, 'height': $('#image1').height()*ratio,
+          'margin':$('#image1').height()/2-$('#image1').height()/2*ratio
+
+        });
+      });
+
+        // var size = ($("#image1").width() - data) * 2;
+        // var size2 = size / 2;
+        // $(function () {        //     $('#image2').css({
+        //         'width': size, 'height': size
+        //     });
+        //     $('#image2').offset({ top: top - size2, left: left - size2 });
+        // });    });
 });
 
     function getCSV() {

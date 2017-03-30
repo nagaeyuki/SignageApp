@@ -79,10 +79,10 @@ function drawHand(jointPoint, handColor) {
 }
 
 
-var frame = 45;
+var frame = 30;
 var min = 80;
-var middle = 150;
-var max = 300;
+var middle = 90;
+var max = 120;
 var move = 40;
 var flag = false;
 var count = 0;
@@ -104,7 +104,11 @@ var averageList2 = [];
 var targetNumber;
 var recognition="";
 
+
+
 socket.on('bodyFrame', function (bodyFrame) {
+  socket.emit("max", max);
+  socket.emit("middle", middle);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     var index = 0;
     var bodyNumberList = [];
@@ -125,16 +129,16 @@ socket.on('bodyFrame', function (bodyFrame) {
 
             var SpineMidZ = Math.floor(bodyFrame.bodies[bodyNumber].joints[1].cameraZ * 100);
             var SpineMidX = Math.floor(bodyFrame.bodies[bodyNumber].joints[1].cameraX * 100);
-           
+
 
             distance.innerHTML = SpineMidZ;
             listZ[bodyNumber].push(SpineMidZ);
             listX[bodyNumber].push(SpineMidX);
 
-            if (targetNumber != null && listZ[targetNumber].length == frame) {          
-                //kinect‚©‚ç‚Ì‹——£‚ªmin,middle‚Ì”ÍˆÍ“à
+            if (targetNumber != null && listZ[targetNumber].length == frame) {
+                //kinectï¿½ï¿½ï¿½ï¿½ï¿½Ì‹ï¿½ï¿½ï¿½ï¿½ï¿½min,middleï¿½Ì”ÍˆÍ“ï¿½
                 if (min < SpineMidZ && SpineMidZ < middle) {
-                    //—§‚¿Ž~‚Ü‚Á‚Ä‚¢‚é‚È‚ç
+                    //ï¿½ï¿½ï¿½ï¿½ï¿½~ï¿½Ü‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½È‚ï¿½
                     if (Math.abs(listZ[targetNumber][0] - listZ[targetNumber][frame - 1]) < move) {
                         state.innerHTML = "stop";
                         range.innerHTML = "true";
@@ -143,7 +147,7 @@ socket.on('bodyFrame', function (bodyFrame) {
                             socket.emit("stop");
                         }
                         recognition = "stop";
-                        socket.emit("distance2", SpineMidZ);
+                        socket.emit("distancedata", SpineMidZ);
                     }
                 } else if (middle <= SpineMidZ && SpineMidZ <= max) {
                     state.innerHTML = "move";
@@ -156,7 +160,7 @@ socket.on('bodyFrame', function (bodyFrame) {
 
                     socket.emit("distance", SpineMidZ);
                 } else if (SpineMidZ > max) {
-               
+
                     range.innerHTML = "false";
                     state.innerHTML = "none";
                    // approach.innerHTML = "none";
@@ -165,7 +169,7 @@ socket.on('bodyFrame', function (bodyFrame) {
                     }
                     recognition = "none";
                 }
-               
+
                 listZ[targetNumber].shift();
                 listX[targetNumber].shift();
             }
@@ -179,7 +183,7 @@ socket.on('bodyFrame', function (bodyFrame) {
         }
         count = 0;
     });
-    //‚±‚±‚©‚ç‰º‚Í”z—ñ‚Ì’·‚³‚ª44‚É‚È‚Á‚Ä‚¢‚é
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‰ºï¿½Í”zï¿½ï¿½ï¿½Ì’ï¿½ï¿½ï¿½ï¿½ï¿½44ï¿½É‚È‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
     switch (bodyNumber) {
         case 0: zero.innerHTML = listZ[bodyNumber];
             break;
@@ -194,7 +198,7 @@ socket.on('bodyFrame', function (bodyFrame) {
         case 5: five.innerHTML = listZ[bodyNumber];
             break;
     }
-    
+
 
     bodyNumbertext.innerHTML = bodyNumberList;
 
@@ -231,7 +235,6 @@ socket.on('bodyFrame', function (bodyFrame) {
 setInterval(function () {
     if (flag) {
         flag = false;
-        
     } else {
         for (var i = 0; i < 6; i++) {
             listZ[i] = [];

@@ -145,10 +145,10 @@ function requestListener(request, response) {
 
 
 
-eddystone = require('eddystone-beacon');
+//eddystone = require('eddystone-beacon');
 //eddystone.advertiseUrl('https://v.gd/znZMyn');//クッションページを送信
 //eddystone.advertiseUrl('https://goo.gl/KX8qQZ');
-eddystone.advertiseUrl('https://v.gd/erfQ03');
+//eddystone.advertiseUrl('https://v.gd/erfQ03');
 /**
  * ファイルの読み込み
  */
@@ -353,10 +353,14 @@ io.sockets.on("connection", function (socket) {
 
     });
 
-    socket.on("distance2", function (data) {
-
-        io.sockets.emit("distance2", data);
-
+    socket.on("distancedata", function (data) {
+        io.sockets.emit("distancedata", data);
+    });
+    socket.on("max", function (data) {
+        io.sockets.emit("max", data);
+    });
+    socket.on("middle", function (data) {
+        io.sockets.emit("middle", data);
     });
 
 });

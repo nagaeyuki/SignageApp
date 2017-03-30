@@ -11,44 +11,61 @@ var connect = 1;
 var check = 1;
 
 
-var urlTransition = ["https://192.168.53.41:443/signage/mainSignage.html", "https://192.168.53.41:443/DigitalSignage2.html"];
+var urlTransition = ["https://iothis.aitech.ac.jp/signage/mainSignage.html", "https://iothis.aitech.ac.jp/DigitalSignage1.html", "https://iothis.aitech.ac.jp/DigitalSignage2.html"];
 
 // roomIDに入室
-socket.emit("pairingFromSignage", { "roomID": roomID });
+socket.emit("pairingFromSignage", {
+    "roomID": roomID
+});
 
+var max = 0;
 
-var distance = 0;
-$(function () {
+$(function() {
 
-    socket.on("none", function (data) {
-        document.location.href = "https://iothis.aitech.ac.jp/DigitalSignage1.html";    });
-    socket.on("move", function (data) {
-        if (distance == 100){
-            document.location.href = "https://iothis.aitech.ac.jp/DigitalSignage1.html";        }    });
+    socket.on("none", function(data) {
+        window.location.href = urlTransition[1];
+    });
 
-    socket.on("distance2", function (data) {
-        console.log(data);        //distance = data;    });
+    // var distance = 0;
+    // socket.on("move", function (data) {
+    //     if (distance == 100){
+    //         window.location.href = urlTransition[1];
+    //     }
+    //
+    // });
+    socket.on("max", function(data) {
+        max = data;
+    });
+    socket.on("distancedata", function(data) {
+        if (data > max) {
+            window.location.href=urlTransition[1];
+        }
+        console.log(data);
+    });
 
-    socket.on("ConnectClear", function (data) {
-        document.location.href = "https://iothis.aitech.ac.jp/signage/pairingSignage.html";    });
+    socket.on("ConnectClear", function(data) {
+        window.location.href = urlTransition[0];
+
+    });
 
     //roomID = $("#roomID").val();
     //var roomID = 1234;
+    //
     console.log("1234");
 
 
     var elem = document.getElementById("pairingCode");
     elem.textContent += roomID;
-    
-    
+
+
     // サーバーからpairingSuccessというデータを受信
-    socket.on("pairingSuccess", function (data) {
+    socket.on("pairingSuccess", function(data) {
         loginSuccessHandler();
         test = 2;
         console.log(test);
     });
 
-    socket.on("pairingFault", function (data) {
+    socket.on("pairingFault", function(data) {
 
         if (test != 2) {
             socket.emit("pairingFaultFromSignage");
@@ -56,12 +73,12 @@ $(function () {
         }
     });
 
-    socket.on("Restart", function (dataFromServer) {
-        document.location.href = "http://iothis.aitech.ac.jp/DigitalSignage2.html";
+    socket.on("Restart", function(dataFromServer) {
+        window.location.href = urlTransition[2];
     });
-    
+
     //接続解除命令が来た時
-    socket.on("ConnectCut", function (data) {
+    socket.on("ConnectCut", function(data) {
         if (connect == 1) {
             socket.emit("EndConnect");
             window.location.href = urlTransition[1];
@@ -76,9 +93,9 @@ $(function () {
             check = 2;
         }
     });
-    
+
     //ユーザが反応して接続解除をやめさせる時
-    socket.on("DontStop", function (data) {
+    socket.on("DontStop", function(data) {
         connect = 2;
     });
 
@@ -87,12 +104,13 @@ $(function () {
         socket.emit("pairingSuccessFromSignage");
         //console.log(number);
         //テストページに遷移
-        document.location.href = "https://iothis.aitech.ac.jp/signage/mainSignage.html";
+        window.location.href = urlTransition[0];
         console.log("ペアリング完了しました");
         //console.log(roomID);
         //number = 1;
     }
 });
+
 function getCSV() {
     var req = new XMLHttpRequest(); // HTTPでファイルを読み込むためのXMLHttpRrequestオブジェクトを生成
     req.open("get", "/csv/event2.csv", true); // アクセスするファイルを指定
@@ -113,38 +131,54 @@ function convertCSVtoArray(str) { // 読み込んだCSVデータが文字列と�
     for (var i = 0; i < tmp.length; ++i) {
         result[i] = tmp[i].split(',');
     }
-        list_view(result);
+    list_view(result);
 }
 
 function list_view(result) {
-    var ul=document.getElementById('ul');
-    ul.innerHTML="";
+    var ul = document.getElementById('ul');
+    ul.innerHTML = "";
     var li = "";
     for (var i = 1; i < result.length - 1; i++) {
-      li="<li>"
+        li = "<li>"
         for (var j = 0; j < result[i].length; j++) {
-            li +=result[i][j]+"<br>";
+            li += result[i][j] + "<br>";
         }
-        li +="</li>";
-        ul.innerHTML+=li;
+        li += "</li>";
+        ul.innerHTML += li;
         li = "";
     }
-  switch_view();
+    switch_view();
 }
 
 function switch_view() {
     var $setElm = $('#viewer'),
-    fadeSpeed = 1500,
-    switchDelay = 7000;
-    $setElm.each(function(){
+        fadeSpeed = 1500,
+        switchDelay = 7000;
+    $setElm.each(function() {
         var targetObj = $(this);
         var findUl = targetObj.find('ul');
         var findLi = targetObj.find('li');
         var findLiFirst = targetObj.find('li:first');
-        findLi.css({display:'block',opacity:'0',zIndex:'99'});
-        findLiFirst.css({zIndex:'100'}).stop().animate({opacity:'1'},fadeSpeed);
-        setInterval(function(){
-            findUl.find('li:first-child').animate({opacity:'0'},fadeSpeed).next('li').css({zIndex:'100'}).animate({opacity:'1'},fadeSpeed).end().appendTo(findUl).css({zIndex:'99'});
-        },switchDelay);
+        findLi.css({
+            display: 'block',
+            opacity: '0',
+            zIndex: '99'
+        });
+        findLiFirst.css({
+            zIndex: '100'
+        }).stop().animate({
+            opacity: '1'
+        }, fadeSpeed);
+        setInterval(function() {
+            findUl.find('li:first-child').animate({
+                opacity: '0'
+            }, fadeSpeed).next('li').css({
+                zIndex: '100'
+            }).animate({
+                opacity: '1'
+            }, fadeSpeed).end().appendTo(findUl).css({
+                zIndex: '99'
+            });
+        }, switchDelay);
     });
 }
