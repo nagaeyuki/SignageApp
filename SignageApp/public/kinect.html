@@ -4,12 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Node Kinect2 Client</title>
-
+<link rel="stylesheet" type="text/css" href="css/kinect.css">
+<script src="//code.jquery.com/jquery-1.12.3.min.js"></script>
 </head>
 <body>
+  <!-- <canvas id="bodycanvas" width="512" height="424"></canvas> -->
     <canvas id="canvas" width="512" height="424"></canvas>
-    <!--<canvas id="bodyCanvas" width="512" height="424"></canvas> -->
     <dl>
+      <p>距離を設定してください（40cm~800cm）</p>
+      <form name="form1" id="form1" action="">
+
+        最小値:<input type="text" id="min">cm
+        中間値:<input type="text" id="middle">cm
+        最大値:<input type="text" id="max">cm
+        <input type="button" value="決定" id="exec">
+    </form>
         <dt>距離</dt>
         <dd id="distance">未取得</dd>
         <dt>状態</dt>

@@ -20,7 +20,16 @@ var bodyNumbertext = document.getElementById('bodyNumbertext');
 var imageProcessing = false;
 var imageWorkerThread = new Worker("js/GrayscaleImageWorker.js");
 
-
+$(function(){
+  $('#exec').click(function(){
+    min = $('#min').val();
+    max = $('#max').val();
+    middle = $('#middle').val();
+    socket.emit("max", max);
+    socket.emit("middle", middle);
+    console.log(min);
+  })
+});
 
 imageWorkerThread.addEventListener("message", function (event) {
     if (event.data.message === 'imageReady') {
@@ -80,9 +89,10 @@ function drawHand(jointPoint, handColor) {
 
 
 var frame = 30;
-var min = 80;
-var middle = 90;
-var max = 120;
+
+//var min = 80;
+//var middle = 90;
+//var max = 120;
 var move = 40;
 var flag = false;
 var count = 0;
@@ -107,8 +117,7 @@ var recognition="";
 
 
 socket.on('bodyFrame', function (bodyFrame) {
-  socket.emit("max", max);
-  socket.emit("middle", middle);
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     var index = 0;
     var bodyNumberList = [];
