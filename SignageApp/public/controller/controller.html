@@ -24,22 +24,23 @@
 <script src="/controller/testController.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/start/jquery-ui.css">
 </head>
+<!-- <body onload="stateCheck()"> -->
 <body>
   <div id="p2rfix">
     <div id="footer" class="mainReset">
-        <button class="mainRelease" type="submit">接続解除</button>
+        <a href = "#last"><button class="mainRelease" type="submit">接続解除</button></a>
     </div>
 
     <div id="footer" class="Reset">
-        <button class="Return" type="submit">メインメニューに戻る</button>
-        <button class="Release" type="submit">接続解除</button>
+        <a href = "#main"><button class="Return" type="submit">メインメニューに戻る</button></a>
+        <a href = "#last"><button class="Release" type="submit">接続解除</button></a>
     </div>
 
     <div class="pairingController">
         <p id="pairingDescription">サイネージに表示された数字を<br>入力してください</p>
         <div class="pairing">
             <input type="tel" id="roomID" maxlength="5" />
-            <button class="pairingButton">ペアリング</button>
+            <a href="#main"><button class="pairingButton">ペアリング</button></a>
         </div>
     </div>
 
@@ -171,9 +172,9 @@
 
 
            <div class="mainController">
-                    <button class="menuBtn1" type="submit">1. 就職支援スケジュールを見る</button>
-                    <button class="menuBtn2" type="submit">2. 新着求人情報を見る</button>
-                    <button class="menuBtn3" type="submit">3. Q&Aを見る</button>
+                    <a href="#calendar"><button class="menuBtn1" type="submit">1. 就職支援スケジュールを見る</button></a>
+                    <a href="#accordion"><button class="menuBtn2" type="submit">2. 新着求人情報を見る</button></a>
+                    <a href="#faq"><button class="menuBtn3" type="submit">3. Q&Aを見る</button></a>
             </div>
 
             <div id="datepicker" />

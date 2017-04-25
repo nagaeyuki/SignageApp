@@ -146,10 +146,10 @@ function requestListener(request, response) {
 
 
 eddystone = require('eddystone-beacon');
-//eddystone.advertiseUrl('https://goo.gl/KX8qQZ');
+eddystone.advertiseUrl('https://goo.gl/KX8qQZ');
 //eddystone.advertiseUrl('https://goo.gl/5h09Zz');
 //eddystone.advertiseUrl('https://v.gd/erfQ03');//クッションページを送信
-eddystone.advertiseUrl('https://goo.gl/DjpbuK');
+
 /**
  * ファイルの読み込み
  */

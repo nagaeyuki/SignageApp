@@ -14,11 +14,32 @@ var testTimer2;
 
 var socketCut = 0;
 var connection = 0;
-
-
 var check = 0;
 
 $(function() {
+  // URLのアンカー（#以降の部分）を取得
+  var urlHash = location.hash;
+  // URLにアンカーが存在する場合
+  switch(urlHash) {
+    case "#main":
+      mainSet();
+      break;
+       case "#calendar":
+       calendarSet();
+       break;
+       case "#accordion":
+       accordionSet();
+       getkyujinCSV();
+       break;
+       case "#faq":
+       faqSet();
+       break;
+       case "#last":
+       lastSet();
+       break;
+       default:pairingSet();
+    }
+console.log(urlHash);
     $('body').bind('touchend', function() {
         socket.emit("ConnectNow");
     });
@@ -34,7 +55,8 @@ $(function() {
         $(".Reset").hide();
     });
 
-    pairingSet();
+    //pairingSet();
+
 
 
 
@@ -56,6 +78,7 @@ $(function() {
         num = clickNum;
         console.log(clickNum);
     });
+
 
     $(".url").click(function() {
         window.open(url[num - 1]);
@@ -87,6 +110,7 @@ $(function() {
         console.log("connection:" + connection);
         if (test == 2) {
             mainSet();
+
         }
     });
 
@@ -233,6 +257,7 @@ console.log(DateAssociationList[dateText]);
 
 });
 
+
 function pairingSet() {
     $(".pairingController").show();
     $(".mainController").hide();
@@ -306,6 +331,18 @@ function lastSet() {
     $(".select").hide();
     $(".hide").show();
 }
+
+// window.onload=function() {
+// switch(state){
+//   case "pairing":
+//   pairingSet();
+//   break;
+//   case "main":mainSet();
+//   break;
+// }
+//pairingSet();
+
+//};
 
 var DateList = [];
 var DateAssociationList = new Object();

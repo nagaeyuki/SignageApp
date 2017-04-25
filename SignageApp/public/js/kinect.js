@@ -1,6 +1,11 @@
+
 var socket = io.connect('/');
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
+// var grayImage=document.getElementById('grayImage');
+// var imageCanvas=document.getElementById('imageCanvas');
+// var imagectx=imageCanvas.getContext('2d');
+// var grayctx=grayImage.getContext('2d');
 var distance = document.getElementById('distance');
 var state = document.getElementById('state');
 var range = document.getElementById('range');
@@ -14,7 +19,6 @@ var four = document.getElementById('four');
 var five = document.getElementById('five');
 var bodyNumbertext = document.getElementById('bodyNumbertext');
 //var averageText = document.getElementById('averageList');
-
 
 //depth
 var imageProcessing = false;
@@ -51,41 +55,44 @@ socket.on('depthFrame', function (imageBuffer) {
 });
 
 
+
+
 //Skeleton
-var colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', '#ff00ff'];
+//var colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', '#ff00ff'];
+var colors=['red.png','green.png','blue.png','yellow.ong','lightblue.png','pink.png']
 // handstate circle size
-var HANDSIZE = 20;
-// closed hand state color
-var HANDCLOSEDCOLOR = "red";
-// open hand state color
-var HANDOPENCOLOR = "green";
-// lasso hand state color
-var HANDLASSOCOLOR = "blue";
+// var HANDSIZE = 20;
+// // closed hand state color
+// var HANDCLOSEDCOLOR = "red";
+// // open hand state color
+// var HANDOPENCOLOR = "green";
+// // lasso hand state color
+// var HANDLASSOCOLOR = "blue";
+// function updateHandState(handState, jointPoint) {
+//     switch (handState) {
+//         case 3:
+//             drawHand(jointPoint, HANDCLOSEDCOLOR);
+//             break;
+//         case 2:
+//             drawHand(jointPoint, HANDOPENCOLOR);
+//             break;
+//         case 4:
+//             drawHand(jointPoint, HANDLASSOCOLOR);
+//             break;
+//     }
+// }
+// function drawHand(jointPoint, handColor) {
+//     // draw semi transparent hand cicles
+//     ctx.globalAlpha = 0.75;
+//     ctx.beginPath();
+//     ctx.fillStyle = handColor;
+//     ctx.arc(jointPoint.depthX * 512, jointPoint.depthY * 424, HANDSIZE, 0, Math.PI * 2, true);
+//     ctx.fill();
+//     ctx.closePath();
+//     ctx.globalAlpha = 1;
+// }
 
-function updateHandState(handState, jointPoint) {
-    switch (handState) {
-        case 3:
-            drawHand(jointPoint, HANDCLOSEDCOLOR);
-            break;
-        case 2:
-            drawHand(jointPoint, HANDOPENCOLOR);
-            break;
-        case 4:
-            drawHand(jointPoint, HANDLASSOCOLOR);
-            break;
-    }
-}
 
-function drawHand(jointPoint, handColor) {
-    // draw semi transparent hand cicles
-    ctx.globalAlpha = 0.75;
-    ctx.beginPath();
-    ctx.fillStyle = handColor;
-    ctx.arc(jointPoint.depthX * 512, jointPoint.depthY * 424, HANDSIZE, 0, Math.PI * 2, true);
-    ctx.fill();
-    ctx.closePath();
-    ctx.globalAlpha = 1;
-}
 
 
 var frame = 30;
@@ -117,18 +124,17 @@ var recognition="";
 
 
 socket.on('bodyFrame', function (bodyFrame) {
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //ctx.clearRect(0, 0, canvas.width, canvas.height);
     var index = 0;
     var bodyNumberList = [];
 
     bodyFrame.bodies.forEach(function (body) {
         if (body.tracked) {
-            for (var jointType in body.joints) {
-                var joint = body.joints[jointType];
-                ctx.fillStyle = colors[index];
-                ctx.fillRect(joint.depthX * 512, joint.depthY * 424, 10, 10);
-            }
+            // for (var jointType in body.joints) {
+            //     var joint = body.joints[jointType];
+            //     ctx.fillStyle = colors[index];
+            //     ctx.fillRect(joint.depthX * 512, joint.depthY * 424, 10, 10);
+            // }
             flag = true;
             bodyNumber = body.bodyIndex;
 
@@ -137,12 +143,36 @@ socket.on('bodyFrame', function (bodyFrame) {
             }
 
             var SpineMidZ = Math.floor(bodyFrame.bodies[bodyNumber].joints[1].cameraZ * 100);
+            // var SpineMidY = Math.floor(bodyFrame.bodies[bodyNumber].joints[1].cameraY * 100);
+            // var SpineMidX = Math.floor(bodyFrame.bodies[bodyNumber].joints[1].cameraX * 100);
+            var SpineMidY = Math.floor(bodyFrame.bodies[bodyNumber].joints[1].cameraY * 100);
             var SpineMidX = Math.floor(bodyFrame.bodies[bodyNumber].joints[1].cameraX * 100);
 
 
-            distance.innerHTML = SpineMidZ;
+            //distance.innerHTML = SpineMidZ;
+            distance.innerHTML=Math.floor(bodyFrame.bodies[bodyNumber].joints[1].depthX * 100)+","+
+            Math.floor(bodyFrame.bodies[bodyNumber].joints[1].depthY * 100);
             listZ[bodyNumber].push(SpineMidZ);
             listX[bodyNumber].push(SpineMidX);
+
+            $('#gray').css({
+              opacity:'0.7',
+               top:SpineMidY-$('#gray').height()/4,
+               left:SpineMidX-$('#gray').width()/4
+
+            });
+            // grayctx.clearRect(0,0,canvas.width, canvas.height);
+            // grayctx.globalAlpha=0.7;
+            // var gray= new Image();
+            // gray.src="/picture/gray.png";
+            //
+            // grayctx.drawImage(gray,SpineMidX,SpineMidY);
+
+            // imagectx.clearRect(0, 0, canvas.width, canvas.height);
+            // imagectx.globalAlpha = 0.7;
+            // var img = new Image();
+            // img.src="/picture/"+colors[index];
+            // imagectx.drawImage(img,SpineMidX,SpineMidY);
 
             if (targetNumber != null && listZ[targetNumber].length == frame) {
                 //kinect�����̋�����min,middle�͈͓̔�
@@ -186,8 +216,8 @@ socket.on('bodyFrame', function (bodyFrame) {
                 listZ[bodyNumber].shift();
                 listX[bodyNumber].shift();
             }
-            updateHandState(body.leftHandState, body.joints[7]);
-            updateHandState(body.rightHandState, body.joints[11]);
+            // updateHandState(body.leftHandState, body.joints[7]);
+            // updateHandState(body.rightHandState, body.joints[11]);
             index++;
         }
         count = 0;
@@ -241,6 +271,7 @@ socket.on('bodyFrame', function (bodyFrame) {
 });
 
 
+
 setInterval(function () {
     if (flag) {
         flag = false;
@@ -254,5 +285,10 @@ setInterval(function () {
             }
             recognition = "none";
         }
+
+        $('#gray').css({
+          opacity:'0'
+        });
+
     }
 }, 1000);
