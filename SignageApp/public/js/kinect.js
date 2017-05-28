@@ -1,4 +1,3 @@
-
 var socket = io.connect('/');
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
@@ -24,18 +23,20 @@ var bodyNumbertext = document.getElementById('bodyNumbertext');
 var imageProcessing = false;
 var imageWorkerThread = new Worker("js/GrayscaleImageWorker.js");
 
-$(function(){
-  $('#exec').click(function(){
-    min = $('#min').val();
-    max = $('#max').val();
-    middle = $('#middle').val();
-    socket.emit("max", max);
-    socket.emit("middle", middle);
-    console.log(min);
-  })
+socket.emit("max", max);
+socket.emit("min", min);
+$(function() {
+    $('#exec').click(function() {
+        min = $('#min').val();
+        max = $('#max').val();
+        //middle = $('#middle').val();
+        socket.emit("max", max);
+        socket.emit("min", min);
+        console.log(min);
+    })
 });
 
-imageWorkerThread.addEventListener("message", function (event) {
+imageWorkerThread.addEventListener("message", function(event) {
     if (event.data.message === 'imageReady') {
         ctx.putImageData(event.data.imageData, 0, 0);
         imageProcessing = false;
@@ -47,10 +48,13 @@ imageWorkerThread.postMessage({
     "imageData": ctx.createImageData(canvas.width, canvas.height)
 });
 
-socket.on('depthFrame', function (imageBuffer) {
+socket.on('depthFrame', function(imageBuffer) {
     if (!imageProcessing) {
         imageProcessing = true;
-        imageWorkerThread.postMessage({ "message": "processImageData", "imageBuffer": imageBuffer });
+        imageWorkerThread.postMessage({
+            "message": "processImageData",
+            "imageBuffer": imageBuffer
+        });
     }
 });
 
@@ -59,47 +63,46 @@ socket.on('depthFrame', function (imageBuffer) {
 
 //Skeleton
 //var colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', '#ff00ff'];
-var colors=['red.png','green.png','blue.png','yellow.ong','lightblue.png','pink.png']
-// handstate circle size
-// var HANDSIZE = 20;
-// // closed hand state color
-// var HANDCLOSEDCOLOR = "red";
-// // open hand state color
-// var HANDOPENCOLOR = "green";
-// // lasso hand state color
-// var HANDLASSOCOLOR = "blue";
-// function updateHandState(handState, jointPoint) {
-//     switch (handState) {
-//         case 3:
-//             drawHand(jointPoint, HANDCLOSEDCOLOR);
-//             break;
-//         case 2:
-//             drawHand(jointPoint, HANDOPENCOLOR);
-//             break;
-//         case 4:
-//             drawHand(jointPoint, HANDLASSOCOLOR);
-//             break;
-//     }
-// }
-// function drawHand(jointPoint, handColor) {
-//     // draw semi transparent hand cicles
-//     ctx.globalAlpha = 0.75;
-//     ctx.beginPath();
-//     ctx.fillStyle = handColor;
-//     ctx.arc(jointPoint.depthX * 512, jointPoint.depthY * 424, HANDSIZE, 0, Math.PI * 2, true);
-//     ctx.fill();
-//     ctx.closePath();
-//     ctx.globalAlpha = 1;
-// }
+var colors = ['red.png', 'green.png', 'blue.png', 'yellow.ong', 'lightblue.png', 'pink.png']
+    // handstate circle size
+    // var HANDSIZE = 20;
+    // // closed hand state color
+    // var HANDCLOSEDCOLOR = "red";
+    // // open hand state color
+    // var HANDOPENCOLOR = "green";
+    // // lasso hand state color
+    // var HANDLASSOCOLOR = "blue";
+    // function updateHandState(handState, jointPoint) {
+    //     switch (handState) {
+    //         case 3:
+    //             drawHand(jointPoint, HANDCLOSEDCOLOR);
+    //             break;
+    //         case 2:
+    //             drawHand(jointPoint, HANDOPENCOLOR);
+    //             break;
+    //         case 4:
+    //             drawHand(jointPoint, HANDLASSOCOLOR);
+    //             break;
+    //     }
+    // }
+    // function drawHand(jointPoint, handColor) {
+    //     // draw semi transparent hand cicles
+    //     ctx.globalAlpha = 0.75;
+    //     ctx.beginPath();
+    //     ctx.fillStyle = handColor;
+    //     ctx.arc(jointPoint.depthX * 512, jointPoint.depthY * 424, HANDSIZE, 0, Math.PI * 2, true);
+    //     ctx.fill();
+    //     ctx.closePath();
+    //     ctx.globalAlpha = 1;
+    // }
 
 
 
 
 var frame = 30;
-
-//var min = 80;
 //var middle = 90;
-//var max = 120;
+var min = 80; //表示切替をする距離
+var max = 200;
 var move = 40;
 var flag = false;
 var count = 0;
@@ -119,16 +122,16 @@ for (var y = 0; y < averageList.length; y++) {
 }
 var averageList2 = [];
 var targetNumber;
-var recognition="";
+var recognition = "";
 
 
 
-socket.on('bodyFrame', function (bodyFrame) {
+socket.on('bodyFrame', function(bodyFrame) {
     //ctx.clearRect(0, 0, canvas.width, canvas.height);
     var index = 0;
     var bodyNumberList = [];
 
-    bodyFrame.bodies.forEach(function (body) {
+    bodyFrame.bodies.forEach(function(body) {
         if (body.tracked) {
             // for (var jointType in body.joints) {
             //     var joint = body.joints[jointType];
@@ -145,22 +148,24 @@ socket.on('bodyFrame', function (bodyFrame) {
             var SpineMidZ = Math.floor(bodyFrame.bodies[bodyNumber].joints[1].cameraZ * 100);
             // var SpineMidY = Math.floor(bodyFrame.bodies[bodyNumber].joints[1].cameraY * 100);
             // var SpineMidX = Math.floor(bodyFrame.bodies[bodyNumber].joints[1].cameraX * 100);
-            var SpineMidY = Math.floor(bodyFrame.bodies[bodyNumber].joints[1].cameraY * 100);
-            var SpineMidX = Math.floor(bodyFrame.bodies[bodyNumber].joints[1].cameraX * 100);
+            var SpineMidY = Math.floor(bodyFrame.bodies[bodyNumber].joints[1].depthY * 100);
+            var SpineMidX = Math.floor(bodyFrame.bodies[bodyNumber].joints[1].depthX * 100);
 
 
-            //distance.innerHTML = SpineMidZ;
-            distance.innerHTML=Math.floor(bodyFrame.bodies[bodyNumber].joints[1].depthX * 100)+","+
-            Math.floor(bodyFrame.bodies[bodyNumber].joints[1].depthY * 100);
+            distance.innerHTML = SpineMidZ;;
             listZ[bodyNumber].push(SpineMidZ);
             listX[bodyNumber].push(SpineMidX);
 
-            $('#gray').css({
-              opacity:'0.7',
-               top:SpineMidY-$('#gray').height()/4,
-               left:SpineMidX-$('#gray').width()/4
 
-            });
+            var InsertImage = document.getElementById('Imageframe');
+            InsertImage.innerHTML = "";
+            InsertImage.innerHTML += "<img id=img_" + index + " src='/picture/" + colors[index] + "'/>";
+            InsertImage.innerHTML += "<img id=gray_" + index + " src='/picture/gray.png'/>"
+
+
+
+
+
             // grayctx.clearRect(0,0,canvas.width, canvas.height);
             // grayctx.globalAlpha=0.7;
             // var gray= new Image();
@@ -176,19 +181,33 @@ socket.on('bodyFrame', function (bodyFrame) {
 
             if (targetNumber != null && listZ[targetNumber].length == frame) {
                 //kinect�����̋�����min,middle�͈͓̔�
-                if (min < SpineMidZ && SpineMidZ < middle) {
+                //if (min < SpineMidZ && SpineMidZ < max) {
+                var ratio = 1 - (SpineMidZ - min) / (max - min);
+                if (SpineMidZ <= min) {
                     //�����~�܂��Ă����Ȃ�
                     if (Math.abs(listZ[targetNumber][0] - listZ[targetNumber][frame - 1]) < move) {
                         state.innerHTML = "stop";
                         range.innerHTML = "true";
-                       // approach.innerHTML = "stop";
+                        // approach.innerHTML = "stop";
                         if (recognition != "stop") {
                             socket.emit("stop");
                         }
                         recognition = "stop";
                         socket.emit("distancedata", SpineMidZ);
+
+                        $('#img_' + index).css({
+                            opacity: 1,
+                            top: bodyFrame.bodies[bodyNumber].joints[1].depthY * canvas.height - 230,
+                            left: bodyFrame.bodies[bodyNumber].joints[1].depthX * canvas.width - 250,
+                            width: $('#gray_'+index).width(),
+                            height: $('#gray_'+index).height()
+                          })
+                          $('#gray_'+index).css({
+                            opacity: 0
+                          })
+
                     }
-                } else if (middle <= SpineMidZ && SpineMidZ <= max) {
+                } else if (min < SpineMidZ && SpineMidZ <= max) {
                     state.innerHTML = "move";
                     range.innerHTML = "true";
                     //approach.innerHTML = "move";
@@ -198,11 +217,24 @@ socket.on('bodyFrame', function (bodyFrame) {
                     recognition = "move";
 
                     socket.emit("distance", SpineMidZ);
+
+                    $('#img_' + index).css({
+                        opacity: 0.7,
+                        top: bodyFrame.bodies[bodyNumber].joints[1].depthY * canvas.height -230,
+                        left: bodyFrame.bodies[bodyNumber].joints[1].depthX * canvas.width - 250,
+                        width: $('#gray_'+index).width() * ratio,
+                        height: $('#gray_'+index).height() * ratio,
+                        margin: ($('#gray_'+index).height() / 2 - $('#gray_'+index).height() / 2 * ratio)
+                    })
+                    $('#gray_'+index).css({
+                        top: bodyFrame.bodies[bodyNumber].joints[1].depthY * canvas.height -230,
+                        left: bodyFrame.bodies[bodyNumber].joints[1].depthX * canvas.width - 250
+                    });
                 } else if (SpineMidZ > max) {
 
                     range.innerHTML = "false";
                     state.innerHTML = "none";
-                   // approach.innerHTML = "none";
+                    // approach.innerHTML = "none";
                     if (recognition != "none") {
                         socket.emit("none");
                     }
@@ -224,17 +256,23 @@ socket.on('bodyFrame', function (bodyFrame) {
     });
     //�������牺�͔z���̒�����44�ɂȂ��Ă���
     switch (bodyNumber) {
-        case 0: zero.innerHTML = listZ[bodyNumber];
+        case 0:
+            zero.innerHTML = listZ[bodyNumber];
             break;
-        case 1: one.innerHTML = listZ[bodyNumber];
+        case 1:
+            one.innerHTML = listZ[bodyNumber];
             break;
-        case 2: two.innerHTML = listZ[bodyNumber];
+        case 2:
+            two.innerHTML = listZ[bodyNumber];
             break;
-        case 3: three.innerHTML = listZ[bodyNumber];
+        case 3:
+            three.innerHTML = listZ[bodyNumber];
             break;
-        case 4: four.innerHTML = listZ[bodyNumber];
+        case 4:
+            four.innerHTML = listZ[bodyNumber];
             break;
-        case 5: five.innerHTML = listZ[bodyNumber];
+        case 5:
+            five.innerHTML = listZ[bodyNumber];
             break;
     }
 
@@ -272,7 +310,7 @@ socket.on('bodyFrame', function (bodyFrame) {
 
 
 
-setInterval(function () {
+setInterval(function() {
     if (flag) {
         flag = false;
     } else {
@@ -286,9 +324,9 @@ setInterval(function () {
             recognition = "none";
         }
 
-        $('#gray').css({
-          opacity:'0'
-        });
+        $('#gray_0').css({
+            opacity: '0'
 
+        });
     }
 }, 1000);

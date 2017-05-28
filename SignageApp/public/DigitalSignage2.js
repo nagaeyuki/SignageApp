@@ -11,7 +11,6 @@ var connect = 1;
 var check = 1;
 
 
-var urlTransition = ["https://iothis.aitech.ac.jp/signage/mainSignage.html", "https://iothis.aitech.ac.jp/DigitalSignage1.html", "https://iothis.aitech.ac.jp/DigitalSignage2.html"];
 
 // roomIDに入室
 socket.emit("pairingFromSignage", {
@@ -21,9 +20,9 @@ socket.emit("pairingFromSignage", {
 var max = 0;
 
 $(function() {
-
-    socket.on("none", function(data) {
-        window.location.href = urlTransition[1];
+    //var urlTransition = ["http://" + IpAddress + "/signage/mainSignage.html", "http://" + IpAddress + "/DigitalSignage1.html", "http://"+IpAddress+"/DigitalSignage2.html"];
+    socket.on("none", function() {
+        document.location.href = "http://" + IpAddress + "/DigitalSignage1.html";
     });
 
     // var distance = 0;
@@ -36,23 +35,20 @@ $(function() {
     socket.on("max", function(data) {
         max = data;
     });
-    socket.on("distancedata", function(data) {
-        if (data > max) {
-            window.location.href=urlTransition[1];
+    socket.on("distancedata", function(distancedata) {
+        if (distancedata > max) {
+            document.location.href = "http://" + IpAddress + "/DigitalSignage1.html";;
         }
-        console.log(data);
+        console.log(distancedata);
     });
 
     socket.on("ConnectClear", function(data) {
-        window.location.href = urlTransition[0];
-
+        document.location.href = "http://" + IpAddress + "/signage/mainSignage.html";
     });
 
     //roomID = $("#roomID").val();
     //var roomID = 1234;
     //
-    console.log("1234");
-
 
     var elem = document.getElementById("pairingCode");
     elem.textContent += roomID;
@@ -74,14 +70,14 @@ $(function() {
     });
 
     socket.on("Restart", function(dataFromServer) {
-        window.location.href = urlTransition[2];
+        document.location.href = "http://" + IpAddress + "/DigitalSignage2.html";
     });
 
     //接続解除命令が来た時
     socket.on("ConnectCut", function(data) {
         if (connect == 1) {
             socket.emit("EndConnect");
-            window.location.href = urlTransition[1];
+            document.location.href = "http://" + IpAddress + "/DigitalSignage1.html";
             console.log("miss");
         }
 
@@ -104,12 +100,13 @@ $(function() {
         socket.emit("pairingSuccessFromSignage");
         //console.log(number);
         //テストページに遷移
-        window.location.href = urlTransition[0];
+        document.location.href = "http://" + IpAddress + "/signage/mainSignage.html";
         console.log("ペアリング完了しました");
         //console.log(roomID);
         //number = 1;
     }
 });
+
 
 function getCSV() {
     var req = new XMLHttpRequest(); // HTTPでファイルを読み込むためのXMLHttpRrequestオブジェクトを生成

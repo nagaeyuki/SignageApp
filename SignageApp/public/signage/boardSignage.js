@@ -7,11 +7,15 @@ var leftPos = 0;
 var connect = 1;
 var check = 1;
 
-var urlTransition = ["https://iothis.aitech.ac.jp/signage/mainSignage.html", "https://iothis.aitech.ac.jp/DigitalSignage2.html"];
+// var urlTransition = ["https://iothis.aitech.ac.jp/signage/mainSignage.html",
+//  "https://iothis.aitech.ac.jp/DigitalSignage2.html"];
 
-$(function () {
+$(function() {
 
-    $('html,body').offset({ top:-190, left: -350 });
+    $('html,body').offset({
+        top: -190,
+        left: -350
+    });
 
     //CSVファイルを読み込む関数getCSV()の定義
     function getCSV() {
@@ -20,7 +24,7 @@ $(function () {
         req.send(null); // HTTPリクエストの発行
 
         // レスポンスが返ってきたらconvertCSVtoArray()を呼ぶ
-        req.onload = function () {
+        req.onload = function() {
             convertCSVtoArray(req.responseText); // 渡されるのは読み込んだCSVデータ
         }
     }
@@ -35,11 +39,11 @@ $(function () {
             result[i] = tmp[i].split(',');
         }
 
-        for (var i = 1; i <= 80 ; i++) {
+        for (var i = 1; i <= 80; i++) {
 
             //$(".kyujin" + i).text(result[i][1]);
             //$(".kyujin" + i).append($("<img/>").attr({ "src": "../picture/pin005.png" }));
-           // $("img").attr('id', 'img'+i);
+            // $("img").attr('id', 'img'+i);
             //$("img").addClass("img");
 
             $(".kyujin" + i).append('<h1>' + result[i][1] + '</h1>');
@@ -54,7 +58,7 @@ $(function () {
             $('h2').addClass("urlText");
 
 
-            if (result[i][9]==1) {
+            if (result[i][9] == 1) {
                 $(".kyujin" + i).append('<p>キャリアセンターにパンフレットあります</p>');
                 $('p:last').addClass("text");
             }
@@ -65,7 +69,7 @@ $(function () {
     getCSV(); //最初に実行される
 
 
-    socket.on("kyujinSelectFromServer", function (data) {
+    socket.on("kyujinSelectFromServer", function(data) {
         num = data.selectNum;
         console.log(num);
         selectCheck(num);
@@ -76,14 +80,21 @@ $(function () {
         topPos = off.top - 50;
         leftPos = off.left - 200;
         console.log("top:" + topPos + "left:" + leftPos);
-        $('html,body').animate({ scrollTop: topPos + "px", scrollLeft: leftPos + "px" }, 2000, "swing");
+        $('html,body').animate({
+            scrollTop: topPos + "px",
+            scrollLeft: leftPos + "px"
+        }, 2000, "swing");
     }
 
-    socket.on("ReturnFromServer", function (data) {
-        window.location.href = urlTransition[0];        console.log("Restart");    });
+    socket.on("ReturnFromServer", function(data) {
+        document.location.href = "http://" + IpAddress + "/signage/mainSignage.html";
+        console.log("Restart");
+    });
 
-    socket.on("Restart", function (data) {
-        window.location.href = urlTransition[1];        console.log("mainRestart");    });    //接続解除命令が来た時    socket.on("ConnectStop", function (data) {        window.location.href = urlTransition[1];    });
+    socket.on("Restart", function(data) {
+        document.location.href = "http://" + IpAddress + "/DigitalSignage2.html";
+        console.log("mainRestart");
+    }); //接続解除命令が来た時    socket.on("ConnectStop", function (data) {        window.location.href = urlTransition[1];    });
 
     moveArrow2();
 

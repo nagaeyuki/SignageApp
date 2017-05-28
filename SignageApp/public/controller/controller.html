@@ -7,28 +7,34 @@
 
 <!DOCTYPE html>
 <head>
+
     <meta charset="UTF-8" />
     <!-- <title>All about the Physical Web</title> -->
     <!-- <meta name="description" content="All you wanted to know about the Physical Web">
     <link rel="shortcut icon" href="../picture/icon.png"> -->
     <title>コントローラ</title>
-
-
-    <script src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="footerFixed.js"></script>
-    <script type="text/javascript" src="browserConfig.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="./footerFixed.js"></script>
+    <script type="text/javascript" src="./browserConfig.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/test.css">
+    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>　
+        <script type="text/javascript" src="../js/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>　
+    <link rel = "stylesheet" href="../js/jquery-ui-1.12.1.custom/jquery-ui.min.css">
+
+    <!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
-<script src="/controller/testController.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/start/jquery-ui.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script> -->
+
+<script type="text/javascript" src="/controller/testController.js"></script>
+
+
+ <!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/start/jquery-ui.css"> -->
 </head>
 <!-- <body onload="stateCheck()"> -->
 <body>
   <div id="p2rfix">
     <div id="footer" class="mainReset">
-        <a href = "#last"><button class="mainRelease" type="submit">接続解除</button></a>
+        <a href="#last"><button class="mainRelease" type="submit">接続解除</button></a>
     </div>
 
     <div id="footer" class="Reset">
@@ -165,14 +171,14 @@
                         <h1 class="company"></h1>
                         <h2 class="number"></h2>
                     </div>
-                    <button class="url">URLを開く</button>
+                    <button class="url">HPを開く</button>
                 </div>
             </div>
 
 
 
            <div class="mainController">
-                    <a href="#calendar"><button class="menuBtn1" type="submit">1. 就職支援スケジュールを見る</button></a>
+                    <a href="#calendar"><button class="menuBtn1" type="submit">1. 就活イベントを見る</button></a>
                     <a href="#accordion"><button class="menuBtn2" type="submit">2. 新着求人情報を見る</button></a>
                     <a href="#faq"><button class="menuBtn3" type="submit">3. Q&Aを見る</button></a>
             </div>

@@ -7,14 +7,15 @@ var number = 0;
 
 var connect = 1;
 var check = 1;
-var urlTransition = ["https://iothis.aitech.ac.jp/signage/mainSignage.html", "https://iothis.aitech.ac.jp/DigitalSignage2.html"];
+// var urlTransition = ["https://iothis.aitech.ac.jp/signage/mainSignage.html",
+//  "https://iothis.aitech.ac.jp/DigitalSignage2.html"];
 
 
 $(function() {
     //CSVファイルを読み込む関数getCSV()の定義
     function getCSV() {
         var req = new XMLHttpRequest(); // HTTPでファイルを読み込むためのXMLHttpRrequestオブジェクトを生成
-        req.open("get", "../csv/courseData2016.csv", true); // アクセスするファイルを指定
+        req.open("get", "../csv/courseData2017.csv", true); // アクセスするファイルを指定
         req.send(null); // HTTPリクエストの発行
         // レスポンスが返ってきたらconvertCSVtoArray()を呼ぶ
         req.onload = function() {
@@ -61,7 +62,7 @@ $(function() {
     getCSV(); //最初に実行される
     console.log("start");
 
-    
+
 flag = false;
     //日付を押したときの処理
     socket.on("dateCalendarFromServer", function(data) {
@@ -103,18 +104,18 @@ flag = false;
     });
 
     socket.on("ReturnFromServer", function(data) {
-        window.location.href = urlTransition[0];
+        document.location.href = "http://" + IpAddress + "/signage/mainSignage.html";
         console.log("Restart");
     });
 
     socket.on("Restart", function(data) {
-        window.location.href = urlTransition[1];
+        document.location.href = "http://" + IpAddress + "/DigitalSignage2.html";
         console.log("mainRestart");
     });
 
     //接続解除命令が来た時
     socket.on("ConnectStop", function(data) {
-        window.location.href = urlTransition[1];
+        document.location.href = "http://" + IpAddress + "/DigitalSignage2.html";
     });
 
 

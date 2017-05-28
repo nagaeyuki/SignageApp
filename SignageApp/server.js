@@ -8,57 +8,24 @@
 var kinect = new Kinect2();
 
 // httpモジュールの読み込み
-//var http = require("http");
-// httpsモジュールの読み込み
-var https = require("https");
+var http = require("http");
 // fsモジュールの読み込み
 var fs = require("fs");
 // pathモジュールの読み込み
 var path = require("path");
-// httpサーバーを立てる
-//var server = http.createServer(requestListener);
-// httpサーバーを起動する。
-//server.listen((process.env.PORT || 8000), function () {
-//console.log((process.env.PORT || 8000) + "でサーバーが起動しました");
-//});
+
+var server = http.Server(app);
+
 // socket.ioの読み込み
-//var socketIO = require("socket.io");
+var socketIO = require("socket.io");
 // サーバーでSocket.IOを使える状態にする
-//var io = socketIO.listen(server);
-
-
-//require('http').createServer(requestListener);
-/*var port = 80;
-server.listen(port);*/
-var options = {
-   key: fs.readFileSync('iothis.key'),
-    cert: fs.readFileSync('iothis.crt')
-    //key: fs.readFileSync('server_key.pem'),
-    //cert: fs.readFileSync('server_crt.pem')
-};
-//var server_http = http.createServer(app);
-var server_https = https.createServer(options, app);
-
-//io = require('socket.io').listen(server_https);
-
-
-
-//require('http').createServer(requestListener);
-//var http_port = 80;
-var https_port = 443;
-
-//server_http.listen(http_port);
-server_https.listen(https_port);
-//var port = 80;
-//server.listen(port);
-
+var io = socketIO.listen(server);
+server.listen(80);
+var http_port = 80;
 
 if (kinect.open()) {
-
-  //console.log('Server listening on port' + http_port);
-  //console.log('Point your browser to http://localhost:' + http_port);
-  console.log('Server listening on port' + https_port);
-  console.log('Point your browser to http://localhost:' + https_port);
+  console.log('Server listening on port' + http_port);
+  console.log('Point your browser to http://localhost:' + http_port);
 
     //depth
     app.use(express.static(__dirname + '/public'));
@@ -75,14 +42,10 @@ if (kinect.open()) {
                         socket.volatile.emit('depthFrame', buffer);
                     });
                 }
-
-
-
                 compressing = false;
             });
         }
     });
-
     kinect.openDepthReader();
     kinect.openBodyReader();
 }
@@ -100,8 +63,6 @@ app.get('/c/', function (req, res) {
 kinect.on('bodyFrame', function (bodyFrame) {
     io.sockets.emit('bodyFrame', bodyFrame);
 });
-
-
 
 var flag = 0;
 /**
@@ -144,12 +105,6 @@ function requestListener(request, response) {
 }
 
 
-
-eddystone = require('eddystone-beacon');
-eddystone.advertiseUrl('https://goo.gl/KX8qQZ');
-//eddystone.advertiseUrl('https://goo.gl/5h09Zz');
-//eddystone.advertiseUrl('https://v.gd/erfQ03');//クッションページを送信
-
 /**
  * ファイルの読み込み
  */
@@ -184,10 +139,7 @@ function readFileHandler(fileName, contentType, isBinary, response) {
     });
 }
 
-var io = require('socket.io').listen(server_https, {
-    key: fs.readFileSync('iothis.key').toString(),
-    cert: fs.readFileSync('iothis.crt').toString()
-});
+
 
 
 var testTimer;
@@ -228,6 +180,20 @@ io.sockets.on("connection", function (socket) {
     var clickNum = 0;
     var socketID;
 
+    socket.on("IpAddress", function () {
+        var os = require('os');
+        var ifaces = os.networkInterfaces();
+        Object.keys(ifaces).forEach(function (ifname) {
+            ifaces[ifname].forEach(function (iface) {
+                if ('IPv4' !== iface.family || iface.internal !== false) {
+                    return;
+                }
+                console.log(ifname, iface.address);
+                io.sockets.emit("IpAddress", iface.address);
+
+            });
+        });
+    });
 
     socket.on("kyujinSelect", function (data) {
         clickNum = data.clickNum;
@@ -338,31 +304,36 @@ io.sockets.on("connection", function (socket) {
 
 
 
-    socket.on("stop", function (data) {
+    socket.on("stop", function () {
         io.sockets.emit("stop");
     });
-    socket.on("none", function (data) {
+    socket.on("none", function () {
         io.sockets.emit("none");
     });
-    socket.on("move", function (data) {
+    socket.on("move", function () {
         io.sockets.emit("move");
     });
 
-    socket.on("distance", function (data) {
-
-        io.sockets.emit("distance", data);
-
+    socket.on("distance", function (distance) {
+        io.sockets.emit("distance", distance);
     });
 
-    socket.on("distancedata", function (data) {
-        io.sockets.emit("distancedata", data);
+    socket.on("distancedata", function (distancedata) {
+        io.sockets.emit("distancedata", distancedata);
     });
-    socket.on("max", function (data) {
-        io.sockets.emit("max", data);
+    socket.on("max", function (max) {
+        io.sockets.emit("max", max);
     });
-    socket.on("middle", function (data) {
-        io.sockets.emit("middle", data);
+    socket.on("min", function (min) {
+        io.sockets.emit("min", min);
     });
+    // socket.on("middle", function (data) {
+    //     io.sockets.emit("middle", data);
+    // });
+    socket.on("shortenurl", function(shortenurl){
+      eddystone = require('eddystone-beacon');
+      eddystone.advertiseUrl(shortenurl);
+    })
 
 });
 // 接続エラー
@@ -374,3 +345,8 @@ io.sockets.on("disconnect", function (socket) {
     socket.emit("disconnectEvent");
     console.log("disconnecth");
 });
+
+
+//eddystone.advertiseUrl('https://goo.gl/KX8qQZ');
+//eddystone.advertiseUrl('https://goo.gl/5h09Zz');
+//eddystone.advertiseUrl('https://v.gd/erfQ03');//クッションページを送信

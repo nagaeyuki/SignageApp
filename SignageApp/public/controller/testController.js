@@ -153,8 +153,8 @@ console.log(urlHash);
             }
         },
         dateFormat: 'yy-mm-dd',
-        minDate: new Date(2016, 4 - 1, 1),
-        maxDate: new Date(2017, 3 - 1, 31),
+        minDate: new Date(2017, 4 - 1, 1),
+        maxDate: new Date(2018, 3 - 1, 31),
         onSelect: function(dateText, inst) {
             var dates = dateText.split('/');
             var year = parseInt(dates[0]);
@@ -176,6 +176,7 @@ console.log(DateAssociationList[dateText]);
                 "monthText": month
             });
             console.log(month);
+            console.log(DateAssociationList);
         }
     })
 
@@ -347,8 +348,9 @@ function lastSet() {
 var DateList = [];
 var DateAssociationList = new Object();
 function getcourseCSV() {
+console.log("aa");
     var req = new XMLHttpRequest();
-    req.open("get", "../csv/courseData2016.csv", true);
+    req.open("get", "../csv/courseData2017.csv", true);
     req.send(null);
     req.onload = function() {
         convertcourseCSVtoArray(req.responseText);
@@ -367,6 +369,7 @@ function convertcourseCSVtoArray(str) {
             DateList.push(result[i][1] + "-" + getMonth(result, i) + "-" + list[j]);
         }
     }
+
     console.log(DateAssociationList);
 }
 function getkyujinCSV() {

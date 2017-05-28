@@ -7,7 +7,8 @@ var connect = 1;
 var check = 1;
 var faqSelect = 1;
 
-var urlTransition = ["https://iothis.aitech.ac.jp/signage/mainSignage.html", "https://iothis.aitech.ac.jp/DigitalSignage2.html"];
+// var urlTransition = ["https://iothis.aitech.ac.jp/signage/mainSignage.html",
+//  "https://iothis.aitech.ac.jp/DigitalSignage2.html"];
 
 $(function() {
     console.log("start");
@@ -68,18 +69,18 @@ $(function() {
     });
 
     socket.on("ReturnFromServer", function(data) {
-        window.location.href = urlTransition[0];
+        document.location.href = "http://" + IpAddress + "/signage/mainSignage.html";
         console.log("Restart");
     });
 
     socket.on("Restart", function(data) {
-        window.location.href = urlTransition[1];
+        document.location.href = "http://" + IpAddress + "/DigitalSignage2.html";
         console.log("mainRestart");
     });
 
     //接続解除命令が来た時
     socket.on("ConnectStop", function(data) {
-        window.location.href = urlTransition[1];
+        document.location.href = "http://" + IpAddress + "/DigitalSignage2.html";
     });
 
 

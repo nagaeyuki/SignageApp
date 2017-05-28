@@ -69,6 +69,7 @@
     <Content Include="public\css\signage.css" />
     <Content Include="public\css\test.css" />
     <Content Include="public\csv\courseData2016.csv" />
+    <Content Include="public\csv\courseData2017.csv" />
     <Content Include="public\csv\course_2016.csv" />
     <Content Include="public\csv\event.csv" />
     <Content Include="public\csv\event2.csv" />
@@ -117,11 +118,13 @@
     <Folder Include="typings\" />
     <Folder Include="typings\globals\" />
     <Folder Include="typings\globals\express\" />
+    <Folder Include="typings\globals\jquery\" />
     <Folder Include="typings\globals\node\" />
     <Folder Include="typings\globals\socket.io\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="typings\globals\express\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\jquery\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\node\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\socket.io\index.d.ts" />
     <TypeScriptCompile Include="typings\index.d.ts" />

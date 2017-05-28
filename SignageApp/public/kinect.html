@@ -5,26 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Node Kinect2 Client</title>
 <link rel="stylesheet" type="text/css" href="css/kinect.css">
-<script src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>　
+<!-- <script src="//code.jquery.com/jquery-1.12.3.min.js"></script> -->
+
 </head>
 <body>
   <div id="test">
 <canvas id="canvas" height="424" width="512"></canvas>
 <!-- <canvas id="imageCanvas" height="424" width="512"></canvas>
 <canvas id="grayImage" height="424" width="512"></canvas>-->
-<div id ="frame">
-<img id="gray" src="/picture/gray.png"/>
+<div id ="Imageframe">
+<!-- <img id="gray" src="/picture/gray.png"/> -->
 </div>
 </div>
   <!-- <canvas id="bodycanvas" width="512" height="424"></canvas> -->
     <!-- <canvas id="canvas" width="512" height="424"></canvas> -->
 <div id="info">
     <dl>
-      <p>距離を設定してください（40cm~800cm）</p>
+      <p>距離を設定してください（40cm～800cm）</p>
       <form name="form1" id="form1" action="">
-
-        最小値:<input type="text" id="min">cm
-        中間値:<input type="text" id="middle">cm
+        最小値(表示切替を行う距離):<input type="text" id="min">cm
+        <!-- 中間値:<input type="text" id="middle">cm -->
         最大値:<input type="text" id="max">cm
         <input type="button" value="決定" id="exec">
     </form>
@@ -57,8 +58,9 @@
         <dt>Number5</dt>
         <dd id="five"></dd>
     </dl>
-    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script src="js/kinect.js"></script>
+
 </div>
 </body>
 </html>
