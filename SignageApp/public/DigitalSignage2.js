@@ -17,7 +17,7 @@ socket.emit("pairingFromSignage", {
     "roomID": roomID
 });
 
-var max = 0;
+var max = 200;
 
 $(function() {
     //var urlTransition = ["http://" + IpAddress + "/signage/mainSignage.html", "http://" + IpAddress + "/DigitalSignage1.html", "http://"+IpAddress+"/DigitalSignage2.html"];

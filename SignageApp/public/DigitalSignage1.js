@@ -5,8 +5,8 @@ $(function() {
     // var off = $("#image1").offset();
     // var top = off.top + 150;
     // var left = off.left + 150;
-    var max = 0;
-    var min = 0;
+    var max =200;
+    var min =80;
     socket.on("max", function(data) {
         max = data;
     });

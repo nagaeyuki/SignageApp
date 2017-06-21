@@ -142,25 +142,21 @@ function readFileHandler(fileName, contentType, isBinary, response) {
 
 
 
-var testTimer;
-var cutTimer;
-var time_limit = 30 * 1000;
-var cut_limit = 10 * 1000;
+var firstTimer = setTimeout(secondTimerStart, 600 * 1000);
+var secondTimer = setTimeout(ConnectStop, 600 * 1000);
 
-
-function loop() {
-    //console.log("testNumber:" + testNumber);
-    console.log("ConnectCut");
-    io.sockets.emit("ConnectCheck");
-    cutTimer = setTimeout(stop, cut_limit);
+function secondTimerStart(){
+  //clearTimeout(firstTimer);//いらないかも
+  io.sockets.emit("ConnectCheck");
+  secondTimer = setTimeout(ConnectStop, 5 * 1000);
 
 }
 
-function stop() {
-    clearInterval(testTimer);
-    io.sockets.emit("ConnectStop");
-    console.log("stop");
+function ConnectStop(){
+io.sockets.emit("ConnectStop");
+clearTimeout(secondTimer);
 }
+
 
 // サーバーへのアクセスを監視。アクセスがあったらコールバックが実行
 io.sockets.on("connection", function (socket) {
@@ -217,7 +213,6 @@ io.sockets.on("connection", function (socket) {
     //コントローラーに接続されたとき
     socket.on("ConnectStart", function (data) {
         io.sockets.emit("ConnectClear");
-        testTimer = setInterval(loop, time_limit);
         console.log("ConnectStart");
     });
 
@@ -250,17 +245,18 @@ io.sockets.on("connection", function (socket) {
     });
 
     //mainControllerからのcourseStartFromControllerというデータを受信
-    socket.on("courseStartFromController", function (data) {
+    socket.on("courseStartFromController", function() {
         io.sockets.emit("courseStartFromServer");
     });
 
+
     //mainControllerからのkyujinStartFromControllerというデータを受信
-    socket.on("kyujinStartFromController", function (data) {
+    socket.on("kyujinStartFromController", function () {
         io.sockets.emit("kyujinStartFromServer");
     });
 
     //mainControllerからのfaqStartFromControllerというデータを受信
-    socket.on("faqStartFromController", function (data) {
+    socket.on("faqStartFromController", function () {
         io.sockets.emit("faqStartFromServer");
     });
 
@@ -283,19 +279,21 @@ io.sockets.on("connection", function (socket) {
     });
 
     //ユーザが反応したら接続解除をやめさせる
-    socket.on("ConnectNow", function (data) {
-        io.sockets.emit("DontStop");
-        clearInterval(testTimer);
-        testTimer = setInterval(loop, time_limit);
-        console.log("ConnectNow");
+    socket.on("ConnectNow", function () {
+        //io.sockets.emit("DontStop");  たぶんいらない
+        clearTimeout(firstTimer);
+        clearTimeout(secondTimer);
+        //firstTimer = setTimeout('secondTimerStart()', 3 * 1000);
+        firstTimer = setTimeout(secondTimerStart, 5*1000);
+        //console.log("ConnectNow");
     });
 
     //一定時間ごとに接続解除命令
-    socket.on("ConnectContinue", function (data) {
-        console.log("ConnectContinue");
-        clearTimeout(cutTimer);
-        //testTimer = setInterval(loop, time_limit);
-    });
+    // socket.on("ConnectContinue", function (data) {
+    //     //console.log("ConnectContinue");
+    //     clearTimeout(secondTimer);
+    //     //firstTimer = setInterval(loop, time_limit);
+    // });
 
     socket.on("FlagReset", function (data) {
         console.log("flag");
